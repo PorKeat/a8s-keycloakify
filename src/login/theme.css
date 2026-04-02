@@ -1,0 +1,371 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Poppins", "Segoe UI", sans-serif;
+    --font-display: "Poppins", "Segoe UI", sans-serif;
+
+    --color-brand-400: #ff8c4d;
+    --color-brand-500: #ff6b1a;
+    --color-brand-600: #eb5f13;
+
+    --color-sand-50: #fdf9f3;
+    --color-sand-100: #f8f2e8;
+    --color-sand-200: #eee5d8;
+    --color-sand-300: #d8cfc1;
+    --color-sand-700: #8d8176;
+    --color-sand-900: #231f1c;
+
+    --color-coal-900: #121111;
+    --color-coal-850: #171515;
+    --color-coal-800: #1d1b1b;
+    --color-coal-700: #2a2626;
+
+    --shadow-login-card: 0 16px 42px rgba(47, 28, 10, 0.07);
+    --shadow-login-card-dark: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+@layer base {
+    :root {
+        color-scheme: light;
+        --kc-page-bg: #f8f3ec;
+        --kc-page-fg: #231f1c;
+        --kc-card-bg: rgba(255, 252, 246, 0.88);
+        --kc-card-border: rgba(214, 203, 191, 0.5);
+        --kc-field-bg: rgba(255, 252, 246, 0.75);
+        --kc-field-border: rgba(74, 67, 61, 0.42);
+        --kc-field-muted: #8d8176;
+        --kc-field-hover-border: rgba(74, 67, 61, 0.58);
+        --kc-divider: rgba(163, 149, 137, 0.45);
+        --kc-ring: rgba(255, 107, 26, 0.22);
+        --kc-logo-glow: rgba(255, 107, 26, 0.22);
+        --kc-danger: #d45f5f;
+        --kc-danger-border: rgba(212, 95, 95, 0.42);
+        --kc-danger-surface: rgba(212, 95, 95, 0.08);
+        --kc-danger-ring: rgba(212, 95, 95, 0.18);
+        --kc-wave-primary: rgba(255, 107, 26, 0.26);
+        --kc-wave-secondary: rgba(255, 107, 26, 0.16);
+        --kc-wave-faint: rgba(255, 107, 26, 0.1);
+        --kc-ambient-glow: rgba(255, 145, 77, 0.045);
+    }
+
+    :root[data-kc-color-scheme="light"] {
+        color-scheme: light;
+    }
+
+    :root[data-kc-color-scheme="dark"] {
+        color-scheme: dark;
+        --kc-page-bg: #121111;
+        --kc-page-fg: #faf4ec;
+        --kc-card-bg: rgba(31, 28, 28, 0.9);
+        --kc-card-border: rgba(255, 255, 255, 0.06);
+        --kc-field-bg: rgba(27, 24, 24, 0.92);
+        --kc-field-border: rgba(255, 255, 255, 0.14);
+        --kc-field-muted: #a79e97;
+        --kc-field-hover-border: rgba(255, 255, 255, 0.24);
+        --kc-divider: rgba(255, 255, 255, 0.12);
+        --kc-ring: rgba(255, 107, 26, 0.28);
+        --kc-logo-glow: rgba(255, 107, 26, 0.3);
+        --kc-danger: #ff9a9a;
+        --kc-danger-border: rgba(255, 154, 154, 0.35);
+        --kc-danger-surface: rgba(255, 154, 154, 0.08);
+        --kc-danger-ring: rgba(255, 154, 154, 0.16);
+        --kc-wave-primary: rgba(255, 107, 26, 0.22);
+        --kc-wave-secondary: rgba(255, 107, 26, 0.14);
+        --kc-wave-faint: rgba(255, 107, 26, 0.08);
+        --kc-ambient-glow: rgba(255, 107, 26, 0.055);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-kc-color-scheme="light"]):not([data-kc-color-scheme="dark"]) {
+            color-scheme: dark;
+            --kc-page-bg: #121111;
+            --kc-page-fg: #faf4ec;
+            --kc-card-bg: rgba(31, 28, 28, 0.9);
+            --kc-card-border: rgba(255, 255, 255, 0.06);
+            --kc-field-bg: rgba(27, 24, 24, 0.92);
+            --kc-field-border: rgba(255, 255, 255, 0.14);
+            --kc-field-muted: #a79e97;
+            --kc-field-hover-border: rgba(255, 255, 255, 0.24);
+            --kc-divider: rgba(255, 255, 255, 0.12);
+            --kc-ring: rgba(255, 107, 26, 0.28);
+            --kc-logo-glow: rgba(255, 107, 26, 0.3);
+            --kc-danger: #ff9a9a;
+            --kc-danger-border: rgba(255, 154, 154, 0.35);
+            --kc-danger-surface: rgba(255, 154, 154, 0.08);
+            --kc-danger-ring: rgba(255, 154, 154, 0.16);
+            --kc-wave-primary: rgba(255, 107, 26, 0.22);
+            --kc-wave-secondary: rgba(255, 107, 26, 0.14);
+            --kc-wave-faint: rgba(255, 107, 26, 0.08);
+            --kc-ambient-glow: rgba(255, 107, 26, 0.055);
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body,
+    #root {
+        min-height: 100%;
+    }
+
+    body {
+        margin: 0;
+        font-family: var(--font-sans);
+        background: radial-gradient(
+                circle at left bottom,
+                rgba(255, 107, 26, 0.12),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at right top,
+                rgba(255, 107, 26, 0.08),
+                transparent 22%
+            ),
+            linear-gradient(180deg, rgba(255, 107, 26, 0.08), transparent 9%),
+            var(--kc-page-bg);
+        color: var(--kc-page-fg);
+    }
+
+    a {
+        color: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+    }
+}
+
+@layer components {
+    .kc-html,
+    .kc-body {
+        min-height: 100%;
+    }
+
+    .kc-login-card {
+        background: var(--kc-card-bg);
+        border: 1px solid var(--kc-card-border);
+        box-shadow: var(--shadow-login-card);
+        backdrop-filter: blur(18px);
+        transition:
+            border-color 180ms ease,
+            box-shadow 180ms ease,
+            background-color 180ms ease;
+    }
+
+    .kc-input-surface {
+        background: var(--kc-field-bg);
+        border: 1px solid var(--kc-field-border);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        transition:
+            background-color 180ms ease,
+            border-color 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-input-surface:hover {
+        border-color: var(--kc-field-hover-border);
+    }
+
+    .kc-input-surface:focus-within {
+        border-color: var(--color-brand-500);
+        box-shadow: 0 0 0 4px var(--kc-ring);
+    }
+
+    .kc-input-surface[data-invalid="true"] {
+        border-color: var(--kc-danger-border);
+        background: linear-gradient(180deg, var(--kc-danger-surface), var(--kc-field-bg));
+    }
+
+    .kc-input-surface[data-invalid="true"]:focus-within {
+        border-color: var(--kc-danger);
+        box-shadow: 0 0 0 4px var(--kc-danger-ring);
+    }
+
+    .kc-input-control {
+        color: var(--kc-page-fg);
+        caret-color: var(--color-brand-500);
+    }
+
+    .kc-input-control::placeholder {
+        color: color-mix(in srgb, var(--kc-field-muted) 88%, transparent);
+    }
+
+    .kc-input-control:-webkit-autofill,
+    .kc-input-control:-webkit-autofill:hover,
+    .kc-input-control:-webkit-autofill:focus {
+        -webkit-text-fill-color: var(--kc-page-fg);
+        box-shadow: 0 0 0 1000px var(--kc-field-bg) inset;
+        transition: background-color 9999s ease-in-out 0s;
+    }
+
+    .kc-icon-button {
+        color: var(--kc-field-muted);
+        transition:
+            color 180ms ease,
+            background-color 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-icon-button:hover {
+        color: var(--kc-page-fg);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .kc-muted {
+        color: var(--kc-field-muted);
+    }
+
+    .kc-divider {
+        background: var(--kc-divider);
+    }
+
+    .kc-link {
+        color: var(--kc-field-muted);
+        text-decoration: none;
+        transition:
+            color 180ms ease,
+            opacity 180ms ease,
+            box-shadow 180ms ease;
+    }
+
+    .kc-link:hover {
+        color: var(--kc-page-fg);
+    }
+
+    .kc-link-accent {
+        color: var(--color-brand-500);
+        text-decoration: none;
+        transition:
+            color 180ms ease,
+            box-shadow 180ms ease;
+    }
+
+    .kc-link-accent:hover {
+        color: var(--color-brand-400);
+    }
+
+    .kc-alert {
+        border-radius: 1.15rem;
+        border: 1px solid transparent;
+        padding: 0.95rem 1rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .kc-alert[data-variant="error"] {
+        border-color: var(--kc-danger-border);
+        background: var(--kc-danger-surface);
+        color: var(--kc-danger);
+    }
+
+    .kc-alert[data-variant="warning"] {
+        border-color: rgba(251, 191, 36, 0.28);
+        background: rgba(251, 191, 36, 0.12);
+        color: #f6d57d;
+    }
+
+    .kc-alert[data-variant="success"] {
+        border-color: rgba(74, 222, 128, 0.28);
+        background: rgba(34, 197, 94, 0.12);
+        color: #7ce0a1;
+    }
+
+    .kc-alert[data-variant="info"] {
+        border-color: rgba(56, 189, 248, 0.28);
+        background: rgba(14, 165, 233, 0.12);
+        color: #81d4fa;
+    }
+
+    .kc-helper-error {
+        color: var(--kc-danger);
+    }
+
+    .kc-check-input {
+        accent-color: var(--color-brand-500);
+        box-shadow: none;
+        transition:
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-control-button {
+        transition:
+            color 180ms ease,
+            background-color 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-check-input:focus-visible,
+    .kc-primary-button:focus-visible,
+    .kc-social-button:focus-visible,
+    .kc-icon-button:focus-visible,
+    .kc-link:focus-visible,
+    .kc-link-accent:focus-visible,
+    .kc-control-button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px var(--kc-ring);
+    }
+
+    .kc-primary-button {
+        background: linear-gradient(180deg, var(--color-brand-500), #ff5f17);
+        box-shadow: 0 8px 18px rgba(255, 107, 26, 0.12);
+        transition:
+            transform 180ms ease,
+            box-shadow 180ms ease,
+            background 180ms ease,
+            opacity 180ms ease;
+    }
+
+    .kc-primary-button:hover {
+        background: linear-gradient(
+            180deg,
+            var(--color-brand-400),
+            var(--color-brand-500)
+        );
+    }
+
+    .kc-primary-button:disabled {
+        box-shadow: none;
+        transform: none;
+        opacity: 0.72;
+    }
+
+    .kc-social-button {
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.015)
+        );
+        border: 1px solid var(--kc-card-border);
+        transition:
+            border-color 180ms ease,
+            background-color 180ms ease,
+            color 180ms ease,
+            transform 180ms ease,
+            box-shadow 180ms ease;
+    }
+
+    .kc-social-button:hover {
+        border-color: rgba(255, 107, 26, 0.32);
+        transform: translateY(-1px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-kc-color-scheme="light"]) .kc-login-card {
+            box-shadow: var(--shadow-login-card-dark);
+        }
+    }
+
+    :root[data-kc-color-scheme="dark"] .kc-login-card {
+        box-shadow: var(--shadow-login-card-dark);
+    }
+}
