@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import UserProfileFormFields from "keycloakify/login/UserProfileFormFields";
 import type { ClassKey } from "keycloakify/login";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
@@ -9,6 +8,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { ActionArrowIcon, AuthLayout } from "../components/AuthLayout";
 import { getSortedSocialProviders, SocialProvidersSection } from "../components/SocialProviders";
+import UserProfileFormFieldsCompact from "../components/UserProfileFormFieldsCompact";
 
 type RegisterKcContext = Extract<KcContext, { pageId: "register.ftl" }>;
 type RegisterKcContextWithSocial = RegisterKcContext & {
@@ -107,7 +107,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
 
             <form
                 id="kc-register-form"
-                className="space-y-5"
+                className="space-y-4 sm:space-y-5"
                 action={url.registrationAction}
                 method="post"
                 onSubmit={() => {
@@ -116,7 +116,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
                 }}
             >
                 <div className="kc-register-fields-grid">
-                    <UserProfileFormFields
+                    <UserProfileFormFieldsCompact
                         kcContext={kcContext}
                         i18n={i18n}
                         kcClsx={kcClsx}
@@ -166,9 +166,9 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
                 </div>
             </form>
 
-            {showSocialProviders && <SocialProvidersSection providers={socialProviders} title="Or sign up with" className="mt-8" />}
+            {showSocialProviders && <SocialProvidersSection providers={socialProviders} title="Or sign up with" className="mt-6 sm:mt-8" />}
 
-            <div className="mt-6">
+            <div className="mt-5 sm:mt-6">
                 <div className="kc-divider h-px w-full" />
                 <p className="mt-4 text-center text-[0.84rem] text-[var(--kc-field-muted)]">
                     <a href={url.loginUrl} className="kc-link-accent font-semibold">
@@ -191,13 +191,13 @@ function TermsAcceptance(props: {
     const { msg, advancedMsg } = i18n;
 
     return (
-        <div className="space-y-3 rounded-[1.35rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.03)] p-4">
+        <div className="space-y-3 rounded-[1.2rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.03)] p-3.5 sm:rounded-[1.35rem] sm:p-4">
             <div className="space-y-2">
                 <p className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[var(--kc-field-muted)]">{msg("termsTitle")}</p>
-                <div className="kc-muted text-[0.9rem] leading-7">{advancedMsg("termsText")}</div>
+                <div className="kc-muted text-[0.88rem] leading-6 sm:text-[0.9rem] sm:leading-7">{advancedMsg("termsText")}</div>
             </div>
 
-            <label className="flex cursor-pointer items-start gap-3 text-[0.9rem] text-[var(--kc-page-fg)]">
+            <label className="flex cursor-pointer items-start gap-3 text-[0.88rem] text-[var(--kc-page-fg)] sm:text-[0.9rem]">
                 <input
                     type="checkbox"
                     id="termsAccepted"

@@ -120,7 +120,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
 
             {realm.password && (
                 <form
-                    className="space-y-5"
+                    className="space-y-4 sm:space-y-5"
                     id="kc-form-login"
                     action={url.loginAction}
                     method="post"
@@ -182,7 +182,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                         </div>
                     </FieldGroup>
 
-                    <div className="flex items-center justify-between gap-4 pt-1">
+                    <div className="flex flex-col items-start gap-3 pt-1 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
                         {realm.rememberMe && !usernameHidden ? (
                             <label className="flex cursor-pointer items-center gap-2 text-[0.82rem] text-[var(--kc-field-muted)]">
                                 <input
@@ -224,7 +224,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
             )}
 
             {auth.showTryAnotherWayLink && (
-                <form id="kc-select-try-another-way-form" action={url.loginAction} method="post" className="mt-5 text-right">
+                <form id="kc-select-try-another-way-form" action={url.loginAction} method="post" className="mt-4 text-left min-[480px]:mt-5 min-[480px]:text-right">
                     <input type="hidden" name="tryAnotherWay" value="on" />
                     <a
                         href="#"
@@ -246,7 +246,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
             )}
 
             {enableWebAuthnConditionalUI && (
-                <div className="mt-5 space-y-4">
+                <div className="mt-4 space-y-4 sm:mt-5">
                     <form id="webauth" action={url.loginAction} method="post">
                         <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
                         <input type="hidden" id="authenticatorData" name="authenticatorData" />
@@ -267,17 +267,17 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                     <button
                         id={webAuthnButtonId}
                         type="button"
-                        className="kc-social-button flex h-[3.25rem] w-full items-center justify-center rounded-full px-5 text-[0.9rem] font-semibold text-[var(--kc-page-fg)]"
+                        className="kc-social-button flex h-[3rem] w-full items-center justify-center rounded-full px-5 text-[0.88rem] font-semibold text-[var(--kc-page-fg)] sm:h-[3.25rem] sm:text-[0.9rem]"
                     >
                         {msgStr("passkey-doAuthenticate")}
                     </button>
                 </div>
             )}
 
-            {showSocialProviders && <SocialProvidersSection providers={socialProviders} className="mt-8" />}
+            {showSocialProviders && <SocialProvidersSection providers={socialProviders} className="mt-6 sm:mt-8" />}
 
             {showRegistration && (
-                <div className="mt-6">
+                <div className="mt-5 sm:mt-6">
                     <div className="kc-divider h-px w-full" />
                     <p className="mt-4 text-center text-[0.84rem] text-[var(--kc-field-muted)]">
                         {msg("noAccount")}{" "}
@@ -295,7 +295,7 @@ function FieldGroup(props: { label: string; htmlFor: string; errorHtml?: string;
     const { label, htmlFor, errorHtml, errorId, children } = props;
 
     return (
-        <div className="space-y-2.5">
+        <div className="space-y-2 sm:space-y-2.5">
             <label htmlFor={htmlFor} className="kc-muted block text-[0.72rem] font-semibold uppercase tracking-[0.16em]">
                 {label}
             </label>

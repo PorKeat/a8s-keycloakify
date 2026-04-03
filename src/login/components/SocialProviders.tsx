@@ -32,26 +32,26 @@ export function SocialProvidersSection(props: {
 
     return (
         <div className={className}>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
                 <div className="kc-divider h-px flex-1" />
                 <span className="kc-muted text-[0.68rem] font-semibold uppercase tracking-[0.16em]">{title}</span>
                 <div className="kc-divider h-px flex-1" />
             </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-3">
+            <div className="kc-social-grid mt-4 grid grid-cols-1 gap-2.5 min-[430px]:grid-cols-3 sm:gap-3">
                 {providers.map(provider => (
                     <a
                         key={provider.alias}
                         id={`social-${provider.alias}`}
                         href={provider.loginUrl}
-                        className="kc-social-button group flex min-h-[4rem] flex-col items-center justify-center gap-1.5 rounded-[1rem] px-3 py-2.5 text-center"
+                        className="kc-social-button group flex min-h-[3.4rem] flex-row items-center justify-start gap-2 rounded-[1rem] px-4 py-3 text-left min-[430px]:min-h-[4rem] min-[430px]:flex-col min-[430px]:justify-center min-[430px]:gap-1.5 min-[430px]:px-3 min-[430px]:py-2.5 min-[430px]:text-center"
                     >
                         <SocialProviderIcon
                             providerId={provider.providerId || provider.alias}
-                            className="h-5 w-5 text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
+                            className="h-5 w-5 shrink-0 text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
                         />
                         <span
-                            className="text-[0.76rem] font-medium text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
+                            className="text-[0.82rem] font-medium text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)] min-[430px]:text-[0.76rem]"
                             dangerouslySetInnerHTML={{
                                 __html: kcSanitize(provider.displayName)
                             }}

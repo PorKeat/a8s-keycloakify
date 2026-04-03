@@ -1144,14 +1144,44 @@
     }
 
     @media (max-width: 767px) {
+        .kc-theme-toggle-shell {
+            width: 100%;
+            max-width: 22rem;
+            margin: 0 auto;
+        }
+
+        .kc-auth-panel {
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.08);
+        }
+
+        .kc-auth-panel::before {
+            inset: 0.7rem;
+            border-radius: calc(1.6rem - 0.45rem);
+            opacity: 0.32;
+        }
+
+        .kc-form-shell::before {
+            left: 1rem;
+            right: 1rem;
+        }
+
+        .kc-brand-column {
+            border-bottom: 1px solid color-mix(in srgb, var(--kc-panel-border) 18%, transparent);
+        }
+
+        .kc-scene-glow-left,
+        .kc-scene-glow-right {
+            opacity: 0.58;
+        }
+
         .kc-decor-top-left,
         .kc-decor-top-right {
-            width: 8.5rem;
+            width: 7.5rem;
         }
 
         .kc-decor-bottom-left {
             left: -10px;
-            width: 14rem;
+            width: 11.5rem;
         }
     }
 }

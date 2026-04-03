@@ -35,13 +35,13 @@ export function AuthLayout(props: {
     }, [colorScheme]);
 
     return (
-        <div className="relative isolate flex min-h-screen select-none items-center justify-center overflow-hidden px-5 py-8 sm:px-8">
-            <div className="kc-scene-glow kc-scene-glow-center pointer-events-none absolute left-1/2 top-1/2 z-0 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--kc-ambient-glow)] blur-3xl" />
-            <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-28 -left-24 z-0 h-80 w-80 rounded-full bg-[var(--kc-scene-glow-left)] blur-3xl" />
-            <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-16 -top-20 z-0 h-72 w-72 rounded-full bg-[var(--kc-scene-glow-right)] blur-3xl" />
+        <div className="relative isolate flex min-h-screen select-none items-center justify-center overflow-hidden px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
+            <div className="kc-scene-glow kc-scene-glow-center pointer-events-none absolute left-1/2 top-1/2 z-0 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--kc-ambient-glow)] blur-3xl sm:h-[32rem] sm:w-[32rem]" />
+            <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-20 -left-16 z-0 h-56 w-56 rounded-full bg-[var(--kc-scene-glow-left)] blur-3xl sm:-bottom-28 sm:-left-24 sm:h-80 sm:w-80" />
+            <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-10 -top-14 z-0 h-52 w-52 rounded-full bg-[var(--kc-scene-glow-right)] blur-3xl sm:-right-16 sm:-top-20 sm:h-72 sm:w-72" />
 
-            <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
-                <div className="kc-theme-toggle-shell flex items-center gap-1.5 rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl">
+            <div className="absolute left-4 right-4 top-3 z-20 sm:left-auto sm:right-6 sm:top-6">
+                <div className="kc-theme-toggle-shell flex items-center justify-center gap-1 rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl">
                     <ColorSchemeButton
                         label="Light"
                         icon={<SunIcon className="h-4 w-4" />}
@@ -59,38 +59,42 @@ export function AuthLayout(props: {
 
             <div
                 className={clsx(
-                    "kc-auth-panel kc-panel-enter relative z-10 w-full max-w-[78rem] overflow-hidden rounded-[2.25rem]",
+                    "kc-auth-panel kc-panel-enter relative z-10 w-full max-w-[78rem] overflow-hidden rounded-[1.6rem] sm:rounded-[2.25rem]",
                     panelClassName
                 )}
             >
                 <PanelDecor />
 
-                <div className={clsx("grid gap-7 md:grid-cols-2 md:gap-0", contentClassName)}>
-                    <section className="kc-brand-column relative z-10 flex min-h-[24rem] flex-col justify-center gap-7 px-8 py-11 sm:px-12 md:min-h-[34rem] md:gap-8 md:pl-22 md:pr-8 md:py-15 lg:pl-24 lg:pr-10">
+                <div className={clsx("grid gap-3 md:grid-cols-2 md:gap-0", contentClassName)}>
+                    <section className="kc-brand-column relative z-10 flex min-h-0 flex-col items-center justify-center gap-5 px-5 pb-5 pt-14 text-center sm:px-10 sm:pb-7 sm:pt-16 md:min-h-[34rem] md:items-start md:gap-8 md:pl-22 md:pr-8 md:py-15 md:text-left lg:pl-24 lg:pr-10">
                         <div className="kc-brand-mark max-w-[20rem]">
                             <img
                                 src={logoUrl}
                                 alt={realmDisplayName}
-                                className="kc-logo-mark h-auto w-[11rem] drop-shadow-[0_0_16px_var(--kc-logo-glow)] sm:w-[11.75rem]"
+                                className="kc-logo-mark h-auto w-[8.75rem] drop-shadow-[0_0_16px_var(--kc-logo-glow)] sm:w-[10rem] md:w-[11rem] lg:w-[11.75rem]"
                             />
-                            <p className="mt-4 text-[1.08rem] font-semibold tracking-[0.28em] text-[var(--kc-page-fg)] opacity-80">{brandLabel}</p>
+                            <p className="mt-3 text-[0.92rem] font-semibold tracking-[0.24em] text-[var(--kc-page-fg)] opacity-80 sm:text-[1rem] md:mt-4 md:text-[1.08rem] md:tracking-[0.28em]">
+                                {brandLabel}
+                            </p>
                         </div>
 
-                        <div className="kc-copy-block max-w-[32rem]">
-                            <h1 className="font-display text-[3.25rem] font-semibold leading-[0.97] tracking-[-0.06em] text-[var(--kc-page-fg)] sm:text-[4rem] lg:text-[4.65rem]">
+                        <div className="kc-copy-block w-full max-w-[32rem]">
+                            <h1 className="font-display text-[2.35rem] font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--kc-page-fg)] sm:text-[3rem] md:text-[3.8rem] lg:text-[4.65rem]">
                                 {title}
                             </h1>
-                            <p className="kc-muted mt-4 max-w-[28rem] text-[1.08rem] leading-8 sm:text-[1.12rem]">{subtitle}</p>
+                            <p className="kc-muted mt-3 max-w-none text-[0.98rem] leading-7 sm:text-[1.04rem] sm:leading-7 md:mt-4 md:max-w-[28rem] md:text-[1.08rem] md:leading-8">
+                                {subtitle}
+                            </p>
                         </div>
                     </section>
 
                     <section
                         className={clsx(
-                            "kc-form-column kc-right-column relative z-10 flex items-center justify-center px-8 pb-11 pt-0 sm:px-12 md:px-14 md:py-15 lg:px-16",
+                            "kc-form-column kc-right-column relative z-10 flex items-center justify-center px-4 pb-5 pt-0 sm:px-8 sm:pb-8 md:px-14 md:py-15 lg:px-16",
                             rightColumnClassName
                         )}
                     >
-                        <div className={clsx("kc-form-shell w-full rounded-[1.75rem] px-6 py-5 sm:px-8 sm:py-6", formShellClassName)}>
+                        <div className={clsx("kc-form-shell w-full rounded-[1.35rem] px-4 py-4 sm:rounded-[1.55rem] sm:px-6 sm:py-5 md:px-8 md:py-6", formShellClassName)}>
                             {children}
                         </div>
                     </section>
@@ -108,7 +112,7 @@ function ColorSchemeButton(props: { label: string; icon: React.ReactNode; isActi
             type="button"
             onClick={onClick}
             className={clsx(
-                "kc-control-button inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[0.78rem] font-semibold transition",
+                "kc-control-button inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-1.75 text-[0.72rem] font-semibold transition sm:flex-none sm:gap-2 sm:px-3.5 sm:py-2 sm:text-[0.78rem]",
                 isActive
                     ? "bg-[var(--color-brand-500)] text-white shadow-[0_10px_24px_rgba(245,96,33,0.26)]"
                     : "text-[var(--kc-field-muted)] hover:bg-[rgba(255,255,255,0.06)] hover:text-[var(--kc-page-fg)]"
