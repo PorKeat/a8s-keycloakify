@@ -177,7 +177,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                                             errorId="input-error-username"
                                         >
                                             <div className="kc-line-field flex items-center gap-3" data-invalid={usernameHasError || undefined}>
-                                                <EnvelopeIcon className="kc-muted mt-3 h-4 w-4 shrink-0" />
+                                                <EnvelopeIcon className="kc-muted h-4 w-4 shrink-0" />
                                                 <input
                                                     tabIndex={2}
                                                     id="username"
@@ -204,7 +204,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                                         errorId="input-error-password"
                                     >
                                         <div className="kc-line-field flex items-center gap-3" data-invalid={passwordHasError || undefined}>
-                                            <LockIcon className="kc-muted mt-3 h-4 w-4 shrink-0" />
+                                            <LockIcon className="kc-muted h-4 w-4 shrink-0" />
                                             <input
                                                 tabIndex={3}
                                                 id="password"
@@ -223,7 +223,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                                                 onClick={() => setIsPasswordVisible(value => !value)}
                                                 aria-label={msgStr(isPasswordVisible ? "hidePassword" : "showPassword")}
                                                 aria-controls="password"
-                                                className="kc-icon-button mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full"
+                                                className="kc-icon-button inline-flex h-9 w-9 items-center justify-center rounded-full"
                                             >
                                                 <EyeIcon className="h-4 w-4" crossed={isPasswordVisible} />
                                             </button>
@@ -357,7 +357,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                             {showRegistration && (
                                 <div className="mt-6">
                                     <div className="kc-divider h-px w-full" />
-                                    <p className="mt-4 text-right text-[0.84rem] text-[var(--kc-field-muted)]">
+                                    <p className="mt-4 text-center text-[0.84rem] text-[var(--kc-field-muted)]">
                                         {msg("noAccount")}{" "}
                                         <a tabIndex={8} href={url.registrationUrl} className="kc-link-accent font-semibold">
                                             {msg("doRegister")}

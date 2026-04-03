@@ -413,7 +413,8 @@
 
     .kc-line-input {
         width: 100%;
-        padding: 0.75rem 0 0.85rem;
+        padding: 0.9rem 0;
+        line-height: 1.5rem;
         background: transparent;
         border: 0;
     }
@@ -435,7 +436,6 @@
     .kc-input-control:-webkit-autofill:hover,
     .kc-input-control:-webkit-autofill:focus {
         -webkit-text-fill-color: var(--kc-page-fg);
-        box-shadow: 0 0 0 1000px var(--kc-panel-bg) inset;
         transition: background-color 9999s ease-in-out 0s;
     }
 
