@@ -93,8 +93,8 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
     return (
         <div className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-5 py-8 sm:px-8">
             <div className="kc-scene-glow kc-scene-glow-center pointer-events-none absolute left-1/2 top-1/2 z-0 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--kc-ambient-glow)] blur-3xl" />
-            <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-28 -left-24 z-0 h-80 w-80 rounded-full bg-[rgba(245,96,33,0.12)] blur-3xl" />
-            <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-16 -top-20 z-0 h-72 w-72 rounded-full bg-[rgba(255,255,255,0.08)] blur-3xl" />
+            <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-28 -left-24 z-0 h-80 w-80 rounded-full bg-[var(--kc-scene-glow-left)] blur-3xl" />
+            <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-16 -top-20 z-0 h-72 w-72 rounded-full bg-[var(--kc-scene-glow-right)] blur-3xl" />
 
             <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
                 <div className="kc-theme-toggle-shell flex items-center gap-1.5 rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl">
@@ -116,8 +116,8 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
             <div className="kc-auth-panel kc-panel-enter relative z-10 w-full max-w-[78rem] overflow-hidden rounded-[2.25rem]">
                 <PanelDecor />
 
-                <div className="grid gap-8 md:grid-cols-[minmax(0,1.22fr)_minmax(390px,0.78fr)] md:gap-0">
-                    <section className="kc-brand-column relative z-10 flex min-h-[26rem] flex-col justify-center gap-8 px-8 py-14 sm:px-12 md:min-h-[38rem] md:gap-10 md:px-[5.5rem] md:py-20 lg:px-[6.25rem]">
+                <div className="grid gap-8 md:grid-cols-2 md:gap-0">
+                    <section className="kc-brand-column relative z-10 flex min-h-[26rem] flex-col justify-center gap-8 px-8 py-14 sm:px-12 md:min-h-[38rem] md:gap-10 md:pl-22 md:pr-8 md:py-20 lg:pl-24 lg:pr-10">
                         <div className="kc-brand-mark max-w-[20rem]">
                             <img
                                 src={logoUrl}
@@ -127,7 +127,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                             <p className="mt-4 text-[1.08rem] font-semibold tracking-[0.28em] text-[var(--kc-page-fg)] opacity-80">Autonomous</p>
                         </div>
 
-                        <div className="kc-copy-block max-w-[38rem]">
+                        <div className="kc-copy-block max-w-[32rem]">
                             <h1 className="font-display text-[3.25rem] font-semibold leading-[0.97] tracking-[-0.06em] text-[var(--kc-page-fg)] sm:text-[4rem] lg:text-[4.65rem]">
                                 Sign In
                             </h1>
@@ -135,7 +135,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                         </div>
                     </section>
 
-                    <section className="kc-form-column kc-right-column relative z-10 flex items-center justify-end px-8 pb-14 pt-0 sm:px-12 md:px-16 md:py-20">
+                    <section className="kc-form-column kc-right-column relative z-10 flex items-center justify-center px-8 pb-14 pt-0 sm:px-12 md:px-14 md:py-20 lg:px-16">
                         <div className="kc-form-shell w-full max-w-[26.5rem] rounded-[1.75rem] px-6 py-7 sm:px-8 sm:py-8">
                             {auth.showUsername && usernameHidden && auth.attemptedUsername && (
                                 <div className="mb-6 rounded-[1rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-sm text-[var(--kc-page-fg)]">

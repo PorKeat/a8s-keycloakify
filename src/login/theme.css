@@ -13,7 +13,7 @@
 @layer base {
     :root {
         color-scheme: light;
-        --kc-page-bg: #f7b27d;
+        --kc-page-bg: #f6f1ea;
         --kc-page-fg: #231f1c;
         --kc-card-bg: rgba(255, 252, 246, 0.84);
         --kc-card-border: rgba(214, 203, 191, 0.5);
@@ -37,10 +37,16 @@
         --kc-shape-outline: rgba(245, 96, 33, 0.34);
         --kc-shape-highlight: rgba(245, 96, 33, 0.18);
         --kc-shape-shadow: rgba(245, 96, 33, 0.12);
-        --kc-ambient-glow: rgba(255, 145, 77, 0.065);
-        --kc-body-top: #ffd68f;
-        --kc-body-mid: #ffb468;
-        --kc-body-bottom: #f49a79;
+        --kc-ambient-glow: rgba(245, 96, 33, 0.028);
+        --kc-body-top: #faf7f2;
+        --kc-body-mid: #f4eee7;
+        --kc-body-bottom: #ede4da;
+        --kc-body-sheen-a: rgba(255, 255, 255, 0.72);
+        --kc-body-sheen-b: rgba(255, 255, 255, 0.42);
+        --kc-body-accent-a: rgba(245, 96, 33, 0.055);
+        --kc-body-accent-b: rgba(245, 96, 33, 0.03);
+        --kc-scene-glow-left: rgba(245, 96, 33, 0.055);
+        --kc-scene-glow-right: rgba(255, 255, 255, 0.22);
     }
 
     :root[data-kc-color-scheme="light"] {
@@ -73,10 +79,16 @@
         --kc-shape-outline: rgba(245, 96, 33, 0.3);
         --kc-shape-highlight: rgba(245, 96, 33, 0.14);
         --kc-shape-shadow: rgba(245, 96, 33, 0.12);
-        --kc-ambient-glow: rgba(255, 107, 26, 0.07);
-        --kc-body-top: #2a1b12;
-        --kc-body-mid: #1d1715;
-        --kc-body-bottom: #130f0f;
+        --kc-ambient-glow: rgba(245, 96, 33, 0.05);
+        --kc-body-top: #241b18;
+        --kc-body-mid: #171314;
+        --kc-body-bottom: #100d0e;
+        --kc-body-sheen-a: rgba(255, 255, 255, 0.04);
+        --kc-body-sheen-b: rgba(255, 255, 255, 0.02);
+        --kc-body-accent-a: rgba(245, 96, 33, 0.09);
+        --kc-body-accent-b: rgba(245, 96, 33, 0.045);
+        --kc-scene-glow-left: rgba(245, 96, 33, 0.08);
+        --kc-scene-glow-right: rgba(255, 255, 255, 0.04);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -106,10 +118,16 @@
             --kc-shape-outline: rgba(245, 96, 33, 0.3);
             --kc-shape-highlight: rgba(245, 96, 33, 0.14);
             --kc-shape-shadow: rgba(245, 96, 33, 0.12);
-            --kc-ambient-glow: rgba(255, 107, 26, 0.07);
-            --kc-body-top: #2a1b12;
-            --kc-body-mid: #1d1715;
-            --kc-body-bottom: #130f0f;
+            --kc-ambient-glow: rgba(245, 96, 33, 0.05);
+            --kc-body-top: #241b18;
+            --kc-body-mid: #171314;
+            --kc-body-bottom: #100d0e;
+            --kc-body-sheen-a: rgba(255, 255, 255, 0.04);
+            --kc-body-sheen-b: rgba(255, 255, 255, 0.02);
+            --kc-body-accent-a: rgba(245, 96, 33, 0.09);
+            --kc-body-accent-b: rgba(245, 96, 33, 0.045);
+            --kc-scene-glow-left: rgba(245, 96, 33, 0.08);
+            --kc-scene-glow-right: rgba(255, 255, 255, 0.04);
         }
     }
 
@@ -127,11 +145,13 @@
         margin: 0;
         font-family: var(--font-sans);
         background: radial-gradient(
-                circle at 14% 18%,
-                rgba(255, 255, 255, 0.24),
-                transparent 18%
+                circle at 14% 16%,
+                var(--kc-body-sheen-a),
+                transparent 22%
             ),
-            radial-gradient(circle at 82% 8%, rgba(255, 255, 255, 0.14), transparent 16%),
+            radial-gradient(circle at 86% 9%, var(--kc-body-sheen-b), transparent 18%),
+            radial-gradient(circle at 10% 100%, var(--kc-body-accent-a), transparent 24%),
+            radial-gradient(circle at 100% 0%, var(--kc-body-accent-b), transparent 22%),
             linear-gradient(
                 180deg,
                 var(--kc-body-top),
@@ -332,8 +352,8 @@
 
     .kc-decor-top-left {
         top: -1px;
-        left: -1px;
-        width: 11rem;
+        left: -10px;
+        width: 11.5rem;
         height: auto;
         animation: kc-decor-float-a 12s ease-in-out 1.2s infinite;
         transform-origin: top left;
@@ -350,8 +370,8 @@
 
     .kc-decor-bottom-left {
         bottom: -1px;
-        left: -1px;
-        width: 19rem;
+        left: -12px;
+        width: 19.75rem;
         height: auto;
         animation: kc-decor-float-c 14s ease-in-out 1.5s infinite;
         transform-origin: bottom left;
@@ -638,12 +658,12 @@
     @keyframes kc-panel-in {
         from {
             opacity: 0;
-            transform: translateY(24px) scale(0.985);
+            transform: translateY(24px);
         }
 
         to {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
     }
 
@@ -696,33 +716,33 @@
     @keyframes kc-decor-float-a {
         0%,
         100% {
-            transform: translate3d(0, 0, 0);
+            transform: scale(1);
         }
 
         50% {
-            transform: translate3d(0, 6px, 0);
+            transform: scale(1.02);
         }
     }
 
     @keyframes kc-decor-float-b {
         0%,
         100% {
-            transform: translate3d(0, 0, 0);
+            transform: scale(1);
         }
 
         50% {
-            transform: translate3d(0, 5px, 0);
+            transform: scale(1.02);
         }
     }
 
     @keyframes kc-decor-float-c {
         0%,
         100% {
-            transform: translate3d(0, 0, 0);
+            transform: scale(1);
         }
 
         50% {
-            transform: translate3d(0, -6px, 0);
+            transform: scale(1.015);
         }
     }
 
@@ -779,7 +799,8 @@
         }
 
         .kc-decor-bottom-left {
-            width: 13.5rem;
+            left: -10px;
+            width: 14rem;
         }
     }
 }
