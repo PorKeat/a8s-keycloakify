@@ -89,11 +89,11 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
         <AuthLayout
             realmDisplayName={realm.displayName || realm.name}
             title="Sign Up"
-            subtitle="Create your account to continue."
-            panelClassName="max-w-[82rem]"
-            contentClassName="md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
-            rightColumnClassName="md:px-14 lg:px-16"
-            formShellClassName="max-w-[46rem]"
+            subtitle="Create your account to get started."
+            panelClassName="max-w-[78rem]"
+            contentClassName="md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
+            rightColumnClassName="md:px-12 lg:px-14"
+            formShellClassName="max-w-[41rem]"
         >
             {message !== undefined && (
                 <div
@@ -107,7 +107,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
 
             <form
                 id="kc-register-form"
-                className="space-y-6"
+                className="space-y-5"
                 action={url.registrationAction}
                 method="post"
                 onSubmit={() => {
@@ -143,7 +143,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
                 <div className="pt-1">
                     {recaptchaRequired && !recaptchaVisible && recaptchaAction !== undefined ? (
                         <button
-                            className="kc-primary-button g-recaptcha flex h-14 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.97rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
+                            className="kc-primary-button g-recaptcha flex h-12 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.94rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
                             data-sitekey={recaptchaSiteKey}
                             data-callback="onSubmitRecaptcha"
                             data-action={recaptchaAction}
@@ -157,7 +157,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
                         <button
                             type="submit"
                             disabled={isSubmitDisabled}
-                            className="kc-primary-button flex h-14 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.97rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
+                            className="kc-primary-button flex h-12 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.94rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
                         >
                             <span>Sign Up</span>
                             <ActionArrowIcon className="kc-primary-arrow h-4 w-4" />

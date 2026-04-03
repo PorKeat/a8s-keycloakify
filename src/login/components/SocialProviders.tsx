@@ -38,13 +38,13 @@ export function SocialProvidersSection(props: {
                 <div className="kc-divider h-px flex-1" />
             </div>
 
-            <div className="mt-5 grid grid-cols-3 gap-3">
+            <div className="mt-4 grid grid-cols-3 gap-3">
                 {providers.map(provider => (
                     <a
                         key={provider.alias}
                         id={`social-${provider.alias}`}
                         href={provider.loginUrl}
-                        className="kc-social-button group flex min-h-[4.35rem] flex-col items-center justify-center gap-2 rounded-[1rem] px-3 py-3 text-center"
+                        className="kc-social-button group flex min-h-[4rem] flex-col items-center justify-center gap-1.5 rounded-[1rem] px-3 py-2.5 text-center"
                     >
                         <SocialProviderIcon
                             providerId={provider.providerId || provider.alias}

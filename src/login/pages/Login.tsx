@@ -91,8 +91,11 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
         <AuthLayout
             realmDisplayName={realm.displayName || realm.name}
             title="Sign In"
-            subtitle="Sign in to continue."
-            formShellClassName="max-w-[26.5rem]"
+            subtitle="Sign in to your account to continue."
+            panelClassName="max-w-[78rem] md:min-h-[40rem]"
+            contentClassName="md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
+            rightColumnClassName="md:min-h-[40rem] md:px-12 lg:px-14"
+            formShellClassName="max-w-[41rem] md:min-h-[30rem]"
         >
             {auth.showUsername && usernameHidden && auth.attemptedUsername && (
                 <div className="mb-6 rounded-[1rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-sm text-[var(--kc-page-fg)]">
@@ -117,7 +120,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
 
             {realm.password && (
                 <form
-                    className="space-y-7"
+                    className="space-y-5"
                     id="kc-form-login"
                     action={url.loginAction}
                     method="post"
@@ -211,7 +214,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                             name="login"
                             type="submit"
                             disabled={isSubmitDisabled}
-                            className="kc-primary-button flex h-14 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.97rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
+                            className="kc-primary-button flex h-12 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.94rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
                         >
                             <span>{msgStr("doLogIn")}</span>
                             <ActionArrowIcon className="kc-primary-arrow h-4 w-4" />

@@ -65,8 +65,8 @@ export function AuthLayout(props: {
             >
                 <PanelDecor />
 
-                <div className={clsx("grid gap-8 md:grid-cols-2 md:gap-0", contentClassName)}>
-                    <section className="kc-brand-column relative z-10 flex min-h-[26rem] flex-col justify-center gap-8 px-8 py-14 sm:px-12 md:min-h-[38rem] md:gap-10 md:pl-22 md:pr-8 md:py-20 lg:pl-24 lg:pr-10">
+                <div className={clsx("grid gap-7 md:grid-cols-2 md:gap-0", contentClassName)}>
+                    <section className="kc-brand-column relative z-10 flex min-h-[24rem] flex-col justify-center gap-7 px-8 py-11 sm:px-12 md:min-h-[34rem] md:gap-8 md:pl-22 md:pr-8 md:py-15 lg:pl-24 lg:pr-10">
                         <div className="kc-brand-mark max-w-[20rem]">
                             <img
                                 src={logoUrl}
@@ -86,11 +86,11 @@ export function AuthLayout(props: {
 
                     <section
                         className={clsx(
-                            "kc-form-column kc-right-column relative z-10 flex items-center justify-center px-8 pb-14 pt-0 sm:px-12 md:px-14 md:py-20 lg:px-16",
+                            "kc-form-column kc-right-column relative z-10 flex items-center justify-center px-8 pb-11 pt-0 sm:px-12 md:px-14 md:py-15 lg:px-16",
                             rightColumnClassName
                         )}
                     >
-                        <div className={clsx("kc-form-shell w-full rounded-[1.75rem] px-6 py-7 sm:px-8 sm:py-8", formShellClassName)}>
+                        <div className={clsx("kc-form-shell w-full rounded-[1.75rem] px-6 py-5 sm:px-8 sm:py-6", formShellClassName)}>
                             {children}
                         </div>
                     </section>
