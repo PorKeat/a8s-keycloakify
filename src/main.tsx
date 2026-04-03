@@ -9,9 +9,40 @@ import { KcPage } from "./kc.gen";
 import { getKcContextMock } from "./login/KcPageStory";
 
 if (import.meta.env.DEV) {
+    const requestedPage = new URL(window.location.href).searchParams.get("page");
+    const pageId = requestedPage === "register" ? "register.ftl" : "login.ftl";
+    const socialOverrides = {
+        social: {
+            displayInfo: true,
+            providers: [
+                {
+                    loginUrl: "/#social-github",
+                    alias: "github",
+                    providerId: "github",
+                    displayName: "GitHub",
+                    iconClasses: "fa fa-github"
+                },
+                {
+                    loginUrl: "/#social-gitlab",
+                    alias: "gitlab",
+                    providerId: "gitlab",
+                    displayName: "GitLab",
+                    iconClasses: "fa fa-gitlab"
+                },
+                {
+                    loginUrl: "/#social-google",
+                    alias: "google",
+                    providerId: "google",
+                    displayName: "Google",
+                    iconClasses: "fa fa-google"
+                }
+            ]
+        }
+    };
+
     window.kcContext = getKcContextMock({
-        pageId: "login.ftl",
-        overrides: {}
+        pageId,
+        overrides: socialOverrides as never
     });
 }
 

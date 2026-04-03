@@ -27,6 +27,7 @@
         --kc-divider: rgba(163, 149, 137, 0.45);
         --kc-ring: rgba(255, 121, 24, 0.22);
         --kc-logo-glow: rgba(255, 121, 24, 0.22);
+        --kc-provider-github: #181717;
         --kc-danger: #d45f5f;
         --kc-danger-border: rgba(212, 95, 95, 0.42);
         --kc-danger-surface: rgba(212, 95, 95, 0.08);
@@ -69,6 +70,7 @@
         --kc-divider: rgba(255, 255, 255, 0.12);
         --kc-ring: rgba(255, 121, 24, 0.28);
         --kc-logo-glow: rgba(255, 121, 24, 0.3);
+        --kc-provider-github: #f5f3ef;
         --kc-danger: #ff9a9a;
         --kc-danger-border: rgba(255, 154, 154, 0.35);
         --kc-danger-surface: rgba(255, 154, 154, 0.08);
@@ -108,6 +110,7 @@
             --kc-divider: rgba(255, 255, 255, 0.12);
             --kc-ring: rgba(255, 121, 24, 0.28);
             --kc-logo-glow: rgba(255, 121, 24, 0.3);
+            --kc-provider-github: #f5f3ef;
             --kc-danger: #ff9a9a;
             --kc-danger-border: rgba(255, 154, 154, 0.35);
             --kc-danger-surface: rgba(255, 154, 154, 0.08);
@@ -658,6 +661,270 @@
 
     .kc-social-button:hover::before {
         opacity: 1;
+    }
+
+    .kc-register-field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.42rem;
+    }
+
+    .kc-register-fields-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.15rem;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group {
+        order: 20;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group:has(#firstName) {
+        order: 1;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group:has(#lastName) {
+        order: 2;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group:has(#username) {
+        order: 3;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group:has(#email) {
+        order: 4;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group:has(#password) {
+        order: 5;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group:has(#password-confirm) {
+        order: 6;
+    }
+
+    .kc-register-fields-grid > .kc-register-field-group + .kc-register-field-group {
+        margin-top: 0;
+    }
+
+    @media (min-width: 768px) {
+        .kc-register-fields-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 1rem;
+            row-gap: 1.2rem;
+        }
+
+        .kc-register-fields-grid > .kc-register-field-group {
+            min-width: 0;
+        }
+
+        .kc-register-fields-grid > .kc-register-field-group:has(.kc-register-group-copy),
+        .kc-register-fields-grid > .kc-register-field-group:has(.kc-register-textarea),
+        .kc-register-fields-grid > .kc-register-field-group:has(.kc-register-input[multiple]),
+        .kc-register-fields-grid > .kc-register-field-group:has(select.kc-register-input[multiple]) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    .kc-register-label-wrapper {
+        margin: 0;
+        font-size: 0;
+    }
+
+    .kc-register-label {
+        display: block;
+        color: var(--kc-field-muted);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .kc-register-group-copy {
+        margin-top: 0.55rem;
+    }
+
+    .kc-register-group-header {
+        display: block;
+        margin-bottom: 0.45rem;
+        color: var(--kc-page-fg);
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+    }
+
+    .kc-register-helper {
+        margin: 0;
+        color: var(--kc-field-muted);
+        font-size: 0.82rem;
+        line-height: 1.6;
+    }
+
+    .kc-register-input-wrapper {
+        position: relative;
+        min-height: calc(3.25rem + 1.7rem);
+    }
+
+    .kc-register-input-wrapper:has(.kc-register-textarea) {
+        min-height: calc(5.75rem + 1.7rem);
+    }
+
+    .kc-register-input-wrapper:has(.kc-register-input[multiple]),
+    .kc-register-input-wrapper:has(select.kc-register-input[multiple]) {
+        min-height: calc(7rem + 1.7rem);
+    }
+
+    .kc-register-input,
+    .kc-register-textarea {
+        width: 100%;
+        min-height: 3.25rem;
+        border: 0;
+        border-bottom: 1.5px solid var(--kc-field-border);
+        border-radius: 0;
+        background: transparent;
+        color: var(--kc-page-fg);
+        padding: 0.92rem 0;
+        line-height: 1.5rem;
+        transition:
+            border-color 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-register-textarea {
+        min-height: 5.75rem;
+        padding-top: 1rem;
+        padding-bottom: 0.85rem;
+        resize: vertical;
+    }
+
+    .kc-register-input:hover,
+    .kc-register-textarea:hover {
+        border-color: var(--kc-field-hover-border);
+        transform: translateY(-1px);
+    }
+
+    .kc-register-input:focus,
+    .kc-register-textarea:focus {
+        outline: none;
+        border-color: var(--color-brand-500);
+        box-shadow: inset 0 -2px 0 var(--color-brand-500);
+        transform: translateY(-1px);
+    }
+
+    .kc-register-input[aria-invalid="true"],
+    .kc-register-textarea[aria-invalid="true"] {
+        border-color: var(--kc-danger-border);
+    }
+
+    .kc-register-input[aria-invalid="true"]:focus,
+    .kc-register-textarea[aria-invalid="true"]:focus {
+        border-color: var(--kc-danger);
+        box-shadow: inset 0 -2px 0 var(--kc-danger);
+    }
+
+    .kc-register-input[multiple] {
+        min-height: 7rem;
+        padding-right: 0.25rem;
+    }
+
+    .kc-register-password-group {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        min-height: 3.25rem;
+        border-bottom: 1.5px solid var(--kc-field-border);
+        transition:
+            border-color 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-register-password-group:hover {
+        border-color: var(--kc-field-hover-border);
+        transform: translateY(-1px);
+    }
+
+    .kc-register-password-group:focus-within {
+        border-color: var(--color-brand-500);
+        box-shadow: inset 0 -2px 0 var(--color-brand-500);
+        transform: translateY(-1px);
+    }
+
+    .kc-register-password-group:has(.kc-register-input[aria-invalid="true"]) {
+        border-color: var(--kc-danger-border);
+    }
+
+    .kc-register-password-group:has(.kc-register-input[aria-invalid="true"]):focus-within {
+        border-color: var(--kc-danger);
+        box-shadow: inset 0 -2px 0 var(--kc-danger);
+    }
+
+    .kc-register-password-group .kc-register-input {
+        min-height: auto;
+        border: 0;
+        border-bottom: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 0.35rem;
+        transform: none;
+    }
+
+    .kc-register-password-group .kc-register-input:hover,
+    .kc-register-password-group .kc-register-input:focus,
+    .kc-register-password-group .kc-register-input[aria-invalid="true"] {
+        border: 0;
+        box-shadow: none;
+        transform: none;
+    }
+
+    .kc-register-password-toggle {
+        margin-right: 0;
+        color: var(--kc-field-muted);
+    }
+
+    .kc-register-password-toggle:hover {
+        color: var(--kc-page-fg);
+        background: rgba(245, 96, 33, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .kc-register-password-icon {
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        background-color: currentColor;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        -webkit-mask-size: contain;
+    }
+
+    .kc-register-password-icon-show {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.75 12S6.5 6.75 12 6.75 21.25 12 21.25 12 17.5 17.25 12 17.25 2.75 12 2.75 12Z'/%3E%3Ccircle cx='12' cy='12' r='2.75'/%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.75 12S6.5 6.75 12 6.75 21.25 12 21.25 12 17.5 17.25 12 17.25 2.75 12 2.75 12Z'/%3E%3Ccircle cx='12' cy='12' r='2.75'/%3E%3C/svg%3E");
+    }
+
+    .kc-register-password-icon-hide {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.75 12S6.5 6.75 12 6.75 21.25 12 21.25 12 17.5 17.25 12 17.25 2.75 12 2.75 12Z'/%3E%3Ccircle cx='12' cy='12' r='2.75'/%3E%3Cpath d='M4 20 20 4'/%3E%3C/svg%3E");
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.75 12S6.5 6.75 12 6.75 21.25 12 21.25 12 17.5 17.25 12 17.25 2.75 12 2.75 12Z'/%3E%3Ccircle cx='12' cy='12' r='2.75'/%3E%3Cpath d='M4 20 20 4'/%3E%3C/svg%3E");
+    }
+
+    .kc-register-error {
+        display: block;
+        margin-top: 0.35rem;
+        min-height: 1.3rem;
+        font-size: 0.82rem;
+        line-height: 1.6;
+    }
+
+    .kc-register-recaptcha {
+        display: flex;
+        justify-content: center;
     }
 
     @keyframes kc-panel-in {
