@@ -33,7 +33,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
     } = kcContext;
     const { social } = kcContext as RegisterKcContextWithSocial;
 
-    const { msgStr, advancedMsg } = i18n;
+    const { advancedMsg } = i18n;
 
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
@@ -59,8 +59,8 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
     }, []);
 
     useEffect(() => {
-        document.title = `${msgStr("registerTitle")} | ${realm.displayName || realm.name}`;
-    }, [msgStr, realm.displayName, realm.name]);
+        document.title = "Sign Up";
+    }, []);
 
     useSetClassName({
         qualifiedName: "html",
@@ -90,6 +90,9 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
             realmDisplayName={realm.displayName || realm.name}
             title="Sign Up"
             subtitle="Create your account to continue."
+            panelClassName="max-w-[82rem]"
+            contentClassName="md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+            rightColumnClassName="md:px-14 lg:px-16"
             formShellClassName="max-w-[46rem]"
         >
             {message !== undefined && (

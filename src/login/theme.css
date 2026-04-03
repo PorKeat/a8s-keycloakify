@@ -182,6 +182,16 @@
         min-height: 100%;
     }
 
+    .kc-html {
+        font-size: 16px;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    .kc-body {
+        font-size: 1rem;
+    }
+
     .kc-theme-toggle-shell {
         opacity: 0;
         animation: kc-fade-up 680ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
@@ -667,6 +677,27 @@
         display: flex;
         flex-direction: column;
         gap: 0.42rem;
+        --kc-register-field-icon: none;
+        --kc-register-field-icon-opacity: 0;
+        --kc-register-field-icon-color: var(--kc-field-muted);
+    }
+
+    .kc-register-field-group:has(#firstName),
+    .kc-register-field-group:has(#lastName),
+    .kc-register-field-group:has(#username) {
+        --kc-register-field-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 12.25a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z'/%3E%3Cpath d='M5.75 19.25a6.25 6.25 0 0 1 12.5 0'/%3E%3C/svg%3E");
+        --kc-register-field-icon-opacity: 0.92;
+    }
+
+    .kc-register-field-group:has(#email) {
+        --kc-register-field-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.75' y='5.75' width='16.5' height='12.5' rx='2.25'/%3E%3Cpath d='M5.5 8.25 12 13l6.5-4.75'/%3E%3C/svg%3E");
+        --kc-register-field-icon-opacity: 0.92;
+    }
+
+    .kc-register-field-group:has(#password),
+    .kc-register-field-group:has(#password-confirm) {
+        --kc-register-field-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4.75' y='10.25' width='14.5' height='9' rx='2.25'/%3E%3Cpath d='M8 10.25V8a4 4 0 1 1 8 0v2.25'/%3E%3C/svg%3E");
+        --kc-register-field-icon-opacity: 0.92;
     }
 
     .kc-register-fields-grid {
@@ -710,8 +741,8 @@
     @media (min-width: 768px) {
         .kc-register-fields-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 1rem;
-            row-gap: 1.2rem;
+            column-gap: 1.15rem;
+            row-gap: 1.15rem;
         }
 
         .kc-register-fields-grid > .kc-register-field-group {
@@ -765,6 +796,30 @@
         min-height: calc(3.25rem + 1.7rem);
     }
 
+    .kc-register-input-wrapper::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.08rem;
+        width: 1rem;
+        height: 1rem;
+        pointer-events: none;
+        background-color: var(--kc-register-field-icon-color);
+        opacity: var(--kc-register-field-icon-opacity);
+        mask-image: var(--kc-register-field-icon);
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        -webkit-mask-image: var(--kc-register-field-icon);
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        -webkit-mask-size: contain;
+        transition:
+            background-color 180ms ease,
+            opacity 180ms ease,
+            transform 180ms ease;
+    }
+
     .kc-register-input-wrapper:has(.kc-register-textarea) {
         min-height: calc(5.75rem + 1.7rem);
     }
@@ -796,6 +851,13 @@
         padding-top: 1rem;
         padding-bottom: 0.85rem;
         resize: vertical;
+    }
+
+    .kc-register-field-group:has(#firstName) .kc-register-input,
+    .kc-register-field-group:has(#lastName) .kc-register-input,
+    .kc-register-field-group:has(#username) .kc-register-input,
+    .kc-register-field-group:has(#email) .kc-register-input {
+        padding-left: 1.85rem;
     }
 
     .kc-register-input:hover,
@@ -833,11 +895,17 @@
         align-items: center;
         gap: 0.25rem;
         min-height: 3.25rem;
+        position: relative;
         border-bottom: 1.5px solid var(--kc-field-border);
         transition:
             border-color 180ms ease,
             box-shadow 180ms ease,
             transform 180ms ease;
+    }
+
+    .kc-register-field-group:has(#password) .kc-register-password-group,
+    .kc-register-field-group:has(#password-confirm) .kc-register-password-group {
+        padding-left: 1.85rem;
     }
 
     .kc-register-password-group:hover {
@@ -891,6 +959,17 @@
         transform: translateY(-1px);
     }
 
+    .kc-register-input-wrapper:focus-within::before {
+        background-color: var(--kc-page-fg);
+        opacity: 1;
+    }
+
+    .kc-register-field-group:has(.kc-register-input[aria-invalid="true"]) .kc-register-input-wrapper::before,
+    .kc-register-field-group:has(.kc-register-textarea[aria-invalid="true"]) .kc-register-input-wrapper::before {
+        background-color: var(--kc-danger);
+        opacity: 1;
+    }
+
     .kc-register-password-icon {
         display: block;
         width: 1rem;
@@ -918,8 +997,8 @@
         display: block;
         margin-top: 0.35rem;
         min-height: 1.3rem;
-        font-size: 0.82rem;
-        line-height: 1.6;
+        font-size: 0.78rem;
+        line-height: 1.45;
     }
 
     .kc-register-recaptcha {

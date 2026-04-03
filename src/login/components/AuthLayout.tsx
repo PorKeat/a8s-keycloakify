@@ -9,6 +9,8 @@ export function AuthLayout(props: {
     title: React.ReactNode;
     subtitle: React.ReactNode;
     children: React.ReactNode;
+    panelClassName?: string;
+    contentClassName?: string;
     formShellClassName?: string;
     rightColumnClassName?: string;
     brandLabel?: string;
@@ -18,6 +20,8 @@ export function AuthLayout(props: {
         title,
         subtitle,
         children,
+        panelClassName,
+        contentClassName,
         formShellClassName,
         rightColumnClassName,
         brandLabel = "Autonomous"
@@ -53,10 +57,15 @@ export function AuthLayout(props: {
                 </div>
             </div>
 
-            <div className="kc-auth-panel kc-panel-enter relative z-10 w-full max-w-[78rem] overflow-hidden rounded-[2.25rem]">
+            <div
+                className={clsx(
+                    "kc-auth-panel kc-panel-enter relative z-10 w-full max-w-[78rem] overflow-hidden rounded-[2.25rem]",
+                    panelClassName
+                )}
+            >
                 <PanelDecor />
 
-                <div className="grid gap-8 md:grid-cols-2 md:gap-0">
+                <div className={clsx("grid gap-8 md:grid-cols-2 md:gap-0", contentClassName)}>
                     <section className="kc-brand-column relative z-10 flex min-h-[26rem] flex-col justify-center gap-8 px-8 py-14 sm:px-12 md:min-h-[38rem] md:gap-10 md:pl-22 md:pr-8 md:py-20 lg:pl-24 lg:pr-10">
                         <div className="kc-brand-mark max-w-[20rem]">
                             <img

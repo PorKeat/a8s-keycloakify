@@ -31,6 +31,8 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
     const { msg, msgStr } = i18n;
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [usernameValue, setUsernameValue] = useState(login.username ?? "");
+    const [passwordValue, setPasswordValue] = useState(login.password ?? "");
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
     const webAuthnButtonId = "authenticateWebAuthnButton";
@@ -42,8 +44,8 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
     });
 
     useEffect(() => {
-        document.title = msgStr("loginTitle", realm.displayName || realm.name);
-    }, [msgStr, realm.displayName, realm.name]);
+        document.title = "Sign In";
+    }, []);
 
     useSetClassName({
         qualifiedName: "html",
@@ -82,6 +84,8 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
     const socialProviders = realm.password ? getSortedSocialProviders(social?.providers ?? []) : [];
     const showSocialProviders = socialProviders.length > 0;
     const showRegistration = realm.password && realm.registrationAllowed && !registrationDisabled;
+    const isCredentialFormComplete = (usernameHidden || usernameValue.trim() !== "") && passwordValue !== "";
+    const isSubmitDisabled = isLoginButtonDisabled || !isCredentialFormComplete;
 
     return (
         <AuthLayout
@@ -133,7 +137,8 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                                     type="text"
                                     autoFocus
                                     required
-                                    defaultValue={login.username ?? ""}
+                                    value={usernameValue}
+                                    onChange={event => setUsernameValue(event.target.value)}
                                     autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
                                     aria-invalid={usernameHasError}
                                     aria-describedby={usernameErrorHtml ? "input-error-username" : undefined}
@@ -148,18 +153,19 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                     <FieldGroup label={msgStr("password")} htmlFor="password" errorHtml={passwordErrorHtml} errorId="input-error-password">
                         <div className="kc-line-field flex items-center gap-3" data-invalid={passwordHasError || undefined}>
                             <LockIcon className="kc-muted h-4 w-4 shrink-0" />
-                            <input
-                                tabIndex={3}
-                                id="password"
-                                name="password"
-                                type={isPasswordVisible ? "text" : "password"}
-                                required
-                                defaultValue={login.password ?? ""}
-                                autoComplete="current-password"
-                                aria-invalid={passwordHasError}
-                                aria-describedby={passwordErrorHtml ? "input-error-password" : undefined}
-                                className="kc-line-input kc-input-control select-text"
-                                placeholder={msgStr("password")}
+                                <input
+                                    tabIndex={3}
+                                    id="password"
+                                    name="password"
+                                    type={isPasswordVisible ? "text" : "password"}
+                                    required
+                                    value={passwordValue}
+                                    onChange={event => setPasswordValue(event.target.value)}
+                                    autoComplete="current-password"
+                                    aria-invalid={passwordHasError}
+                                    aria-describedby={passwordErrorHtml ? "input-error-password" : undefined}
+                                    className="kc-line-input kc-input-control select-text"
+                                    placeholder={msgStr("password")}
                             />
                             <button
                                 type="button"
@@ -204,7 +210,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                             id="kc-login"
                             name="login"
                             type="submit"
-                            disabled={isLoginButtonDisabled}
+                            disabled={isSubmitDisabled}
                             className="kc-primary-button flex h-14 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.97rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
                         >
                             <span>{msgStr("doLogIn")}</span>

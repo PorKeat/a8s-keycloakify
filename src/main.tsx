@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import "./login/theme.css";
 import { KcPage } from "./kc.gen";
+import faviconIcoUrl from "./login/assets/favicon.ico";
 
 // The following block can be uncommented to test a specific page with `yarn dev`
 // Don't forget to comment back or your bundle size will increase
@@ -46,6 +47,8 @@ if (import.meta.env.DEV) {
     });
 }
 
+setFavicon();
+
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         {!window.kcContext ? (
@@ -55,3 +58,15 @@ createRoot(document.getElementById("root")!).render(
         )}
     </StrictMode>
 );
+
+function setFavicon() {
+    const link = document.querySelector<HTMLLinkElement>("link[rel~='icon']") ?? document.createElement("link");
+
+    link.rel = "icon";
+    link.type = "image/x-icon";
+    link.href = faviconIcoUrl;
+
+    if (!link.parentNode) {
+        document.head.appendChild(link);
+    }
+}
