@@ -92,13 +92,12 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
 
     return (
         <div className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-5 py-8 sm:px-8">
-            <WaveBackdrop />
-            <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--kc-ambient-glow)] blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-28 -left-24 z-0 h-80 w-80 rounded-full bg-[rgba(255,107,26,0.14)] blur-3xl" />
-            <div className="pointer-events-none absolute -right-16 -top-20 z-0 h-72 w-72 rounded-full bg-[rgba(255,255,255,0.06)] blur-3xl" />
+            <div className="kc-scene-glow kc-scene-glow-center pointer-events-none absolute left-1/2 top-1/2 z-0 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--kc-ambient-glow)] blur-3xl" />
+            <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-28 -left-24 z-0 h-80 w-80 rounded-full bg-[rgba(245,96,33,0.12)] blur-3xl" />
+            <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-16 -top-20 z-0 h-72 w-72 rounded-full bg-[rgba(255,255,255,0.08)] blur-3xl" />
 
             <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
-                <div className="flex items-center gap-1.5 rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl">
+                <div className="kc-theme-toggle-shell flex items-center gap-1.5 rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl">
                     <ColorSchemeButton
                         label="Light"
                         icon={<SunIcon className="h-4 w-4" />}
@@ -114,301 +113,304 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                 </div>
             </div>
 
-            <div className="kc-login-card relative z-10 w-full max-w-[28rem] rounded-[2rem] px-6 py-7 sm:px-9 sm:py-9">
-                <div className="flex flex-col items-center text-center">
-                    <img
-                        src={logoUrl}
-                        alt={realm.displayName || realm.name}
-                        className="h-auto w-[10.5rem] drop-shadow-[0_0_18px_var(--kc-logo-glow)]"
-                    />
-                    <h1 className="mt-4 font-display text-[2.05rem] font-semibold leading-none tracking-[-0.04em] text-[var(--kc-page-fg)]">
-                        Sign In
-                    </h1>
-                    <p className="kc-muted mt-4 max-w-[17.5rem] text-[0.95rem] leading-6">Sign in to scan and secure your container images</p>
-                </div>
+            <div className="kc-auth-panel kc-panel-enter relative z-10 w-full max-w-[78rem] overflow-hidden rounded-[2.25rem]">
+                <PanelDecor />
 
-                {auth.showUsername && usernameHidden && auth.attemptedUsername && (
-                    <div className="mt-6 rounded-[1.15rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-sm text-[var(--kc-page-fg)]">
-                        <div className="flex items-center justify-between gap-3">
-                            <span className="truncate">{auth.attemptedUsername}</span>
-                            <a href={url.loginRestartFlowUrl} className="kc-link-accent shrink-0 text-[0.8rem] font-semibold">
-                                Change
-                            </a>
+                <div className="grid gap-8 md:grid-cols-[minmax(0,1.22fr)_minmax(390px,0.78fr)] md:gap-0">
+                    <section className="kc-brand-column relative z-10 flex min-h-[26rem] flex-col justify-center gap-8 px-8 py-14 sm:px-12 md:min-h-[38rem] md:gap-10 md:px-[5.5rem] md:py-20 lg:px-[6.25rem]">
+                        <div className="kc-brand-mark max-w-[20rem]">
+                            <img
+                                src={logoUrl}
+                                alt={realm.displayName || realm.name}
+                                className="kc-logo-mark h-auto w-[11rem] drop-shadow-[0_0_16px_var(--kc-logo-glow)] sm:w-[11.75rem]"
+                            />
+                            <p className="mt-4 text-[1.08rem] font-semibold tracking-[0.28em] text-[var(--kc-page-fg)] opacity-80">Autonomous</p>
                         </div>
-                    </div>
-                )}
 
-                {shouldDisplayAlert && message !== undefined && (
-                    <div
-                        className="kc-alert mt-6"
-                        data-variant={message.type}
-                        dangerouslySetInnerHTML={{
-                            __html: kcSanitize(message.summary)
-                        }}
-                    />
-                )}
+                        <div className="kc-copy-block max-w-[38rem]">
+                            <h1 className="font-display text-[3.25rem] font-semibold leading-[0.97] tracking-[-0.06em] text-[var(--kc-page-fg)] sm:text-[4rem] lg:text-[4.65rem]">
+                                Sign In
+                            </h1>
+                            <p className="kc-muted mt-4 max-w-[28rem] text-[1.08rem] leading-8 sm:text-[1.12rem]">Sign in to continue.</p>
+                        </div>
+                    </section>
 
-                {realm.password && (
-                    <form
-                        className="mt-8 space-y-5"
-                        id="kc-form-login"
-                        action={url.loginAction}
-                        method="post"
-                        onSubmit={() => {
-                            setIsLoginButtonDisabled(true);
-                            return true;
-                        }}
-                    >
-                        {!usernameHidden && (
-                            <FieldGroup label={usernameLabel} htmlFor="username" errorHtml={usernameErrorHtml} errorId="input-error-username">
-                                <div
-                                    className="kc-input-surface flex items-center gap-3 rounded-[0.95rem] px-4"
-                                    data-invalid={usernameHasError || undefined}
-                                >
-                                    <EnvelopeIcon className="kc-muted h-4 w-4 shrink-0" />
-                                    <input
-                                        tabIndex={2}
-                                        id="username"
-                                        name="username"
-                                        type="text"
-                                        autoFocus
-                                        required
-                                        defaultValue={login.username ?? ""}
-                                        autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
-                                        aria-invalid={usernameHasError}
-                                        aria-describedby={usernameErrorHtml ? "input-error-username" : undefined}
-                                        className="kc-input-control h-14 w-full bg-transparent text-[0.95rem] outline-none"
-                                        placeholder={usernameLabel}
-                                        spellCheck={false}
-                                    />
+                    <section className="kc-form-column kc-right-column relative z-10 flex items-center justify-end px-8 pb-14 pt-0 sm:px-12 md:px-16 md:py-20">
+                        <div className="kc-form-shell w-full max-w-[26.5rem] rounded-[1.75rem] px-6 py-7 sm:px-8 sm:py-8">
+                            {auth.showUsername && usernameHidden && auth.attemptedUsername && (
+                                <div className="mb-6 rounded-[1rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-sm text-[var(--kc-page-fg)]">
+                                    <div className="flex items-center justify-between gap-3">
+                                        <span className="truncate">{auth.attemptedUsername}</span>
+                                        <a href={url.loginRestartFlowUrl} className="kc-link-accent shrink-0 text-[0.8rem] font-semibold">
+                                            Change
+                                        </a>
+                                    </div>
                                 </div>
-                            </FieldGroup>
-                        )}
+                            )}
 
-                        <FieldGroup label={msgStr("password")} htmlFor="password" errorHtml={passwordErrorHtml} errorId="input-error-password">
-                            <div
-                                className="kc-input-surface flex items-center gap-3 rounded-[0.95rem] px-4"
-                                data-invalid={passwordHasError || undefined}
-                            >
-                                <LockIcon className="kc-muted h-4 w-4 shrink-0" />
-                                <input
-                                    tabIndex={3}
-                                    id="password"
-                                    name="password"
-                                    type={isPasswordVisible ? "text" : "password"}
-                                    required
-                                    defaultValue={login.password ?? ""}
-                                    autoComplete="current-password"
-                                    aria-invalid={passwordHasError}
-                                    aria-describedby={passwordErrorHtml ? "input-error-password" : undefined}
-                                    className="kc-input-control h-14 w-full bg-transparent text-[0.95rem] outline-none"
-                                    placeholder={msgStr("password")}
+                            {shouldDisplayAlert && message !== undefined && (
+                                <div
+                                    className="kc-alert mb-6"
+                                    data-variant={message.type}
+                                    dangerouslySetInnerHTML={{
+                                        __html: kcSanitize(message.summary)
+                                    }}
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => setIsPasswordVisible(value => !value)}
-                                    aria-label={msgStr(isPasswordVisible ? "hidePassword" : "showPassword")}
-                                    aria-controls="password"
-                                    className="kc-icon-button inline-flex h-9 w-9 items-center justify-center rounded-full"
-                                >
-                                    <EyeIcon className="h-4 w-4" crossed={isPasswordVisible} />
-                                </button>
-                            </div>
-                        </FieldGroup>
-
-                        <div className="flex items-center justify-between gap-4 pt-0.5">
-                            {realm.rememberMe && !usernameHidden ? (
-                                <label className="flex cursor-pointer items-center gap-2 text-[0.82rem] text-[var(--kc-field-muted)]">
-                                    <input
-                                        tabIndex={5}
-                                        id="rememberMe"
-                                        name="rememberMe"
-                                        type="checkbox"
-                                        defaultChecked={!!login.rememberMe}
-                                        className="kc-check-input h-4 w-4 rounded border-[var(--kc-field-border)] bg-transparent"
-                                    />
-                                    <span>{msg("rememberMe")}</span>
-                                </label>
-                            ) : (
-                                <span />
                             )}
 
-                            {realm.resetPasswordAllowed && (
-                                <a tabIndex={6} href={url.loginResetCredentialsUrl} className="kc-link text-[0.82rem]">
-                                    {msg("doForgotPassword")}
-                                </a>
-                            )}
-                        </div>
-
-                        <div className="pt-1">
-                            <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
-                            <button
-                                tabIndex={7}
-                                id="kc-login"
-                                name="login"
-                                type="submit"
-                                disabled={isLoginButtonDisabled}
-                                className="kc-primary-button flex h-14 w-full items-center justify-center rounded-[0.95rem] border-0 px-5 text-[0.97rem] font-semibold text-white transition hover:translate-y-[-1px] disabled:cursor-not-allowed disabled:opacity-70"
-                            >
-                                {msgStr("doLogIn")}
-                            </button>
-                        </div>
-                    </form>
-                )}
-
-                {auth.showTryAnotherWayLink && (
-                    <form id="kc-select-try-another-way-form" action={url.loginAction} method="post" className="mt-4 text-center">
-                        <input type="hidden" name="tryAnotherWay" value="on" />
-                        <a
-                            href="#"
-                            id="try-another-way"
-                            className="kc-link text-[0.82rem] font-medium"
-                            onClick={event => {
-                                const form = document.getElementById("kc-select-try-another-way-form");
-
-                                if (form instanceof HTMLFormElement) {
-                                    form.requestSubmit();
-                                }
-
-                                event.preventDefault();
-                            }}
-                        >
-                            {msg("doTryAnotherWay")}
-                        </a>
-                    </form>
-                )}
-
-                {enableWebAuthnConditionalUI && (
-                    <div className="mt-4 space-y-4">
-                        <form id="webauth" action={url.loginAction} method="post">
-                            <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
-                            <input type="hidden" id="authenticatorData" name="authenticatorData" />
-                            <input type="hidden" id="signature" name="signature" />
-                            <input type="hidden" id="credentialId" name="credentialId" />
-                            <input type="hidden" id="userHandle" name="userHandle" />
-                            <input type="hidden" id="error" name="error" />
-                        </form>
-
-                        {authenticators !== undefined && authenticators.authenticators.length !== 0 && (
-                            <form id="authn_select">
-                                {authenticators.authenticators.map((authenticator, index) => (
-                                    <input key={index} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
-                                ))}
-                            </form>
-                        )}
-
-                        <button
-                            id={webAuthnButtonId}
-                            type="button"
-                            className="kc-social-button flex h-14 w-full items-center justify-center rounded-[0.95rem] px-5 text-[0.95rem] font-semibold text-[var(--kc-page-fg)] transition"
-                        >
-                            {msgStr("passkey-doAuthenticate")}
-                        </button>
-                    </div>
-                )}
-
-                {showSocialProviders && (
-                    <div className="mt-8">
-                        <div className="flex items-center gap-4">
-                            <div className="kc-divider h-px flex-1" />
-                            <span className="kc-muted text-[0.68rem] font-semibold uppercase tracking-[0.16em]">Or continue with</span>
-                            <div className="kc-divider h-px flex-1" />
-                        </div>
-
-                        <div className="mt-5 grid grid-cols-3 gap-3">
-                            {socialProviders.map(provider => (
-                                <a
-                                    key={provider.alias}
-                                    id={`social-${provider.alias}`}
-                                    href={provider.loginUrl}
-                                    className="kc-social-button group flex min-h-[4.8rem] flex-col items-center justify-center gap-2 rounded-[1rem] px-3 py-3 text-center transition"
+                            {realm.password && (
+                                <form
+                                    className="space-y-7"
+                                    id="kc-form-login"
+                                    action={url.loginAction}
+                                    method="post"
+                                    onSubmit={() => {
+                                        setIsLoginButtonDisabled(true);
+                                        return true;
+                                    }}
                                 >
-                                    <SocialProviderIcon
-                                        providerId={provider.providerId || provider.alias}
-                                        className="h-5 w-5 text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
-                                    />
-                                    <span
-                                        className="text-[0.78rem] font-medium text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
-                                        dangerouslySetInnerHTML={{
-                                            __html: kcSanitize(provider.displayName)
+                                    {!usernameHidden && (
+                                        <FieldGroup
+                                            label={usernameLabel}
+                                            htmlFor="username"
+                                            errorHtml={usernameErrorHtml}
+                                            errorId="input-error-username"
+                                        >
+                                            <div className="kc-line-field flex items-center gap-3" data-invalid={usernameHasError || undefined}>
+                                                <EnvelopeIcon className="kc-muted mt-3 h-4 w-4 shrink-0" />
+                                                <input
+                                                    tabIndex={2}
+                                                    id="username"
+                                                    name="username"
+                                                    type="text"
+                                                    autoFocus
+                                                    required
+                                                    defaultValue={login.username ?? ""}
+                                                    autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
+                                                    aria-invalid={usernameHasError}
+                                                    aria-describedby={usernameErrorHtml ? "input-error-username" : undefined}
+                                                    className="kc-line-input kc-input-control"
+                                                    placeholder={usernameLabel}
+                                                    spellCheck={false}
+                                                />
+                                            </div>
+                                        </FieldGroup>
+                                    )}
+
+                                    <FieldGroup
+                                        label={msgStr("password")}
+                                        htmlFor="password"
+                                        errorHtml={passwordErrorHtml}
+                                        errorId="input-error-password"
+                                    >
+                                        <div className="kc-line-field flex items-center gap-3" data-invalid={passwordHasError || undefined}>
+                                            <LockIcon className="kc-muted mt-3 h-4 w-4 shrink-0" />
+                                            <input
+                                                tabIndex={3}
+                                                id="password"
+                                                name="password"
+                                                type={isPasswordVisible ? "text" : "password"}
+                                                required
+                                                defaultValue={login.password ?? ""}
+                                                autoComplete="current-password"
+                                                aria-invalid={passwordHasError}
+                                                aria-describedby={passwordErrorHtml ? "input-error-password" : undefined}
+                                                className="kc-line-input kc-input-control"
+                                                placeholder={msgStr("password")}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsPasswordVisible(value => !value)}
+                                                aria-label={msgStr(isPasswordVisible ? "hidePassword" : "showPassword")}
+                                                aria-controls="password"
+                                                className="kc-icon-button mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full"
+                                            >
+                                                <EyeIcon className="h-4 w-4" crossed={isPasswordVisible} />
+                                            </button>
+                                        </div>
+                                    </FieldGroup>
+
+                                    <div className="flex items-center justify-between gap-4 pt-1">
+                                        {realm.rememberMe && !usernameHidden ? (
+                                            <label className="flex cursor-pointer items-center gap-2 text-[0.82rem] text-[var(--kc-field-muted)]">
+                                                <input
+                                                    tabIndex={5}
+                                                    id="rememberMe"
+                                                    name="rememberMe"
+                                                    type="checkbox"
+                                                    defaultChecked={!!login.rememberMe}
+                                                    className="kc-check-input h-4 w-4 rounded border-[var(--kc-field-border)] bg-transparent"
+                                                />
+                                                <span>{msg("rememberMe")}</span>
+                                            </label>
+                                        ) : (
+                                            <span />
+                                        )}
+
+                                        {realm.resetPasswordAllowed && (
+                                            <a tabIndex={6} href={url.loginResetCredentialsUrl} className="kc-link text-[0.82rem]">
+                                                {msg("doForgotPassword")}
+                                            </a>
+                                        )}
+                                    </div>
+
+                                    <div className="pt-1">
+                                        <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
+                                        <button
+                                            tabIndex={7}
+                                            id="kc-login"
+                                            name="login"
+                                            type="submit"
+                                            disabled={isLoginButtonDisabled}
+                                            className="kc-primary-button flex h-14 w-full items-center justify-center gap-3 rounded-full border-0 px-6 text-[0.97rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-not-allowed"
+                                        >
+                                            <span>{msgStr("doLogIn")}</span>
+                                            <ActionArrowIcon className="kc-primary-arrow h-4 w-4" />
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+
+                            {auth.showTryAnotherWayLink && (
+                                <form id="kc-select-try-another-way-form" action={url.loginAction} method="post" className="mt-5 text-right">
+                                    <input type="hidden" name="tryAnotherWay" value="on" />
+                                    <a
+                                        href="#"
+                                        id="try-another-way"
+                                        className="kc-link text-[0.82rem] font-medium"
+                                        onClick={event => {
+                                            const form = document.getElementById("kc-select-try-another-way-form");
+
+                                            if (form instanceof HTMLFormElement) {
+                                                form.requestSubmit();
+                                            }
+
+                                            event.preventDefault();
                                         }}
-                                    />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                                    >
+                                        {msg("doTryAnotherWay")}
+                                    </a>
+                                </form>
+                            )}
 
-                {showRegistration && (
-                    <div className="mt-5">
-                        <div className="kc-divider h-px w-full" />
-                        <p className="mt-4 text-center text-[0.84rem] text-[var(--kc-field-muted)]">
-                            {msg("noAccount")}{" "}
-                            <a tabIndex={8} href={url.registrationUrl} className="kc-link-accent font-semibold">
-                                {msg("doRegister")}
-                            </a>
-                        </p>
-                    </div>
-                )}
+                            {enableWebAuthnConditionalUI && (
+                                <div className="mt-5 space-y-4">
+                                    <form id="webauth" action={url.loginAction} method="post">
+                                        <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
+                                        <input type="hidden" id="authenticatorData" name="authenticatorData" />
+                                        <input type="hidden" id="signature" name="signature" />
+                                        <input type="hidden" id="credentialId" name="credentialId" />
+                                        <input type="hidden" id="userHandle" name="userHandle" />
+                                        <input type="hidden" id="error" name="error" />
+                                    </form>
+
+                                    {authenticators !== undefined && authenticators.authenticators.length !== 0 && (
+                                        <form id="authn_select">
+                                            {authenticators.authenticators.map((authenticator, index) => (
+                                                <input key={index} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
+                                            ))}
+                                        </form>
+                                    )}
+
+                                    <button
+                                        id={webAuthnButtonId}
+                                        type="button"
+                                        className="kc-social-button flex h-[3.25rem] w-full items-center justify-center rounded-full px-5 text-[0.9rem] font-semibold text-[var(--kc-page-fg)]"
+                                    >
+                                        {msgStr("passkey-doAuthenticate")}
+                                    </button>
+                                </div>
+                            )}
+
+                            {showSocialProviders && (
+                                <div className="mt-8">
+                                    <div className="flex items-center gap-4">
+                                        <div className="kc-divider h-px flex-1" />
+                                        <span className="kc-muted text-[0.68rem] font-semibold uppercase tracking-[0.16em]">Or continue with</span>
+                                        <div className="kc-divider h-px flex-1" />
+                                    </div>
+
+                                    <div className="mt-5 grid grid-cols-3 gap-3">
+                                        {socialProviders.map(provider => (
+                                            <a
+                                                key={provider.alias}
+                                                id={`social-${provider.alias}`}
+                                                href={provider.loginUrl}
+                                                className="kc-social-button group flex min-h-[4.35rem] flex-col items-center justify-center gap-2 rounded-[1rem] px-3 py-3 text-center"
+                                            >
+                                                <SocialProviderIcon
+                                                    providerId={provider.providerId || provider.alias}
+                                                    className="h-5 w-5 text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
+                                                />
+                                                <span
+                                                    className="text-[0.76rem] font-medium text-[var(--kc-field-muted)] transition group-hover:text-[var(--kc-page-fg)]"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: kcSanitize(provider.displayName)
+                                                    }}
+                                                />
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {showRegistration && (
+                                <div className="mt-6">
+                                    <div className="kc-divider h-px w-full" />
+                                    <p className="mt-4 text-right text-[0.84rem] text-[var(--kc-field-muted)]">
+                                        {msg("noAccount")}{" "}
+                                        <a tabIndex={8} href={url.registrationUrl} className="kc-link-accent font-semibold">
+                                            {msg("doRegister")}
+                                        </a>
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     );
 }
 
-function WaveBackdrop() {
+function PanelDecor() {
     return (
         <>
-            <div className="pointer-events-none absolute inset-x-[-6%] top-0 z-0 h-40 sm:h-48">
-                <svg viewBox="0 0 1440 220" preserveAspectRatio="none" className="h-full w-full">
-                    <path
-                        d="M-40 22C164 8 330 6 538 20c194 13 382 16 942 6"
-                        fill="none"
-                        stroke="var(--kc-wave-primary)"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                    />
-                    <path
-                        d="M-70 58c221-18 431-16 631-4 255 15 509 16 949-2"
-                        fill="none"
-                        stroke="var(--kc-wave-secondary)"
-                        strokeWidth="1.15"
-                        strokeLinecap="round"
-                    />
-                    <path
-                        d="M-120 102c281-24 552-17 815-2 207 12 428 14 785 4"
-                        fill="none"
-                        stroke="var(--kc-wave-faint)"
-                        strokeWidth="1"
-                        strokeLinecap="round"
-                    />
-                </svg>
-            </div>
+            <svg viewBox="0 0 188 138" className="kc-decor kc-decor-top-left" aria-hidden="true">
+                <path
+                    d="M0 0h188v14c0 14-11 26-25 27-31 3-52 14-61 35-13 31-37 62-102 62V0Z"
+                    fill="var(--kc-blob-a)"
+                    stroke="var(--kc-shape-outline)"
+                    strokeWidth="1.25"
+                />
+                <path d="M0 18h58c19 0 32 15 32 34v15c0 15-11 27-26 27H48c-20 0-34 16-34 36v8H0V18Z" fill="var(--kc-blob-c)" opacity="0.88" />
+                <ellipse cx="123" cy="26" rx="35" ry="11" fill="var(--kc-shape-highlight)" opacity="0.7" />
+            </svg>
 
-            <div className="pointer-events-none absolute inset-x-[-6%] bottom-0 z-0 h-40 sm:h-48">
-                <svg viewBox="0 0 1440 220" preserveAspectRatio="none" className="h-full w-full rotate-180">
+            <svg viewBox="0 0 188 138" className="kc-decor kc-decor-top-right" aria-hidden="true">
+                <g transform="translate(188 0) scale(-1 1)">
                     <path
-                        d="M-40 22C164 8 330 6 538 20c194 13 382 16 942 6"
-                        fill="none"
-                        stroke="var(--kc-wave-primary)"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
+                        d="M0 0h188v14c0 14-11 26-25 27-31 3-52 14-61 35-13 31-37 62-102 62V0Z"
+                        fill="var(--kc-blob-a)"
+                        stroke="var(--kc-shape-outline)"
+                        strokeWidth="1.25"
                     />
-                    <path
-                        d="M-70 58c221-18 431-16 631-4 255 15 509 16 949-2"
-                        fill="none"
-                        stroke="var(--kc-wave-secondary)"
-                        strokeWidth="1.15"
-                        strokeLinecap="round"
-                    />
-                    <path
-                        d="M-120 102c281-24 552-17 815-2 207 12 428 14 785 4"
-                        fill="none"
-                        stroke="var(--kc-wave-faint)"
-                        strokeWidth="1"
-                        strokeLinecap="round"
-                    />
-                </svg>
-            </div>
+                    <path d="M0 18h58c19 0 32 15 32 34v15c0 15-11 27-26 27H48c-20 0-34 16-34 36v8H0V18Z" fill="var(--kc-blob-c)" opacity="0.86" />
+                    <ellipse cx="123" cy="26" rx="35" ry="11" fill="var(--kc-shape-highlight)" opacity="0.62" />
+                </g>
+            </svg>
+
+            <svg viewBox="0 0 360 230" className="kc-decor kc-decor-bottom-left" aria-hidden="true">
+                <path
+                    d="M0 230V74c0-34 24-58 58-58 37 0 58 25 58 62v58c0 17 11 26 27 26 27 0 45-14 64-34 27-30 61-46 97-46 32 0 56 20 56 58v90H0Z"
+                    fill="var(--kc-blob-a)"
+                    stroke="var(--kc-shape-outline)"
+                    strokeWidth="1.25"
+                />
+                <path d="M30 230v-96c0-31 18-52 43-52 23 0 39 16 39 42v106H30Z" fill="var(--kc-blob-c)" opacity="0.9" />
+                <path d="M132 230v-16c30-30 68-46 102-46 30 0 52 12 68 34v28H132Z" fill="var(--kc-blob-b)" opacity="0.5" />
+                <ellipse cx="226" cy="118" rx="54" ry="16" fill="var(--kc-shape-highlight)" opacity="0.34" />
+            </svg>
         </>
     );
 }
@@ -432,7 +434,7 @@ function FieldGroup(props: { label: string; htmlFor: string; errorHtml?: string;
 
     return (
         <div className="space-y-2.5">
-            <label htmlFor={htmlFor} className="kc-muted block text-[0.69rem] font-semibold uppercase tracking-[0.16em]">
+            <label htmlFor={htmlFor} className="kc-muted block text-[0.72rem] font-semibold uppercase tracking-[0.16em]">
                 {label}
             </label>
             {children}
@@ -460,7 +462,7 @@ function ColorSchemeButton(props: { label: string; icon: React.ReactNode; isActi
             className={clsx(
                 "kc-control-button inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[0.78rem] font-semibold transition",
                 isActive
-                    ? "bg-[var(--color-brand-500)] text-white shadow-[0_10px_24px_rgba(255,107,26,0.24)]"
+                    ? "bg-[var(--color-brand-500)] text-white shadow-[0_10px_24px_rgba(245,96,33,0.26)]"
                     : "text-[var(--kc-field-muted)] hover:bg-[rgba(255,255,255,0.06)] hover:text-[var(--kc-page-fg)]"
             )}
             aria-pressed={isActive}
@@ -563,6 +565,15 @@ function CircleStackIcon(props: { className?: string }) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={props.className} aria-hidden="true">
             <circle cx="12" cy="12" r="8.25" />
             <path d="M8.75 12h6.5M12 8.75v6.5" />
+        </svg>
+    );
+}
+
+function ActionArrowIcon(props: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={props.className} aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
         </svg>
     );
 }
