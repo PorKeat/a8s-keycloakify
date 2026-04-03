@@ -441,6 +441,9 @@
 
     .kc-icon-button {
         color: var(--kc-field-muted);
+        cursor: pointer;
+        flex-shrink: 0;
+        border-radius: 9999px;
         transition:
             color 180ms ease,
             background-color 180ms ease,
@@ -450,7 +453,7 @@
 
     .kc-icon-button:hover {
         color: var(--kc-page-fg);
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(245, 96, 33, 0.1);
         transform: translateY(-1px);
     }
 
@@ -525,6 +528,7 @@
 
     .kc-check-input {
         accent-color: var(--color-brand-500);
+        cursor: pointer;
         box-shadow: none;
         transition:
             box-shadow 180ms ease,
@@ -558,6 +562,7 @@
         position: relative;
         isolation: isolate;
         overflow: hidden;
+        cursor: pointer;
         border: 1px solid rgba(245, 96, 33, 0.94);
         background: #f56021;
         box-shadow: 0 14px 28px rgba(245, 96, 33, 0.18);

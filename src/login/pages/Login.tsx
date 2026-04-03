@@ -91,7 +91,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
     const showRegistration = realm.password && realm.registrationAllowed && !registrationDisabled;
 
     return (
-        <div className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-5 py-8 sm:px-8">
+        <div className="relative isolate flex min-h-screen select-none items-center justify-center overflow-hidden px-5 py-8 sm:px-8">
             <div className="kc-scene-glow kc-scene-glow-center pointer-events-none absolute left-1/2 top-1/2 z-0 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--kc-ambient-glow)] blur-3xl" />
             <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-28 -left-24 z-0 h-80 w-80 rounded-full bg-[var(--kc-scene-glow-left)] blur-3xl" />
             <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-16 -top-20 z-0 h-72 w-72 rounded-full bg-[var(--kc-scene-glow-right)] blur-3xl" />
@@ -189,7 +189,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                                                     autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
                                                     aria-invalid={usernameHasError}
                                                     aria-describedby={usernameErrorHtml ? "input-error-username" : undefined}
-                                                    className="kc-line-input kc-input-control"
+                                                    className="kc-line-input kc-input-control select-text"
                                                     placeholder={usernameLabel}
                                                     spellCheck={false}
                                                 />
@@ -215,7 +215,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                                                 autoComplete="current-password"
                                                 aria-invalid={passwordHasError}
                                                 aria-describedby={passwordErrorHtml ? "input-error-password" : undefined}
-                                                className="kc-line-input kc-input-control"
+                                                className="kc-line-input kc-input-control select-text"
                                                 placeholder={msgStr("password")}
                                             />
                                             <button
