@@ -14,6 +14,7 @@ export function AuthLayout(props: {
     formShellClassName?: string;
     rightColumnClassName?: string;
     brandLabel?: string;
+    homeHref?: string;
 }) {
     const {
         realmDisplayName,
@@ -24,7 +25,8 @@ export function AuthLayout(props: {
         contentClassName,
         formShellClassName,
         rightColumnClassName,
-        brandLabel = "Autonomous"
+        brandLabel = "Autonomous",
+        homeHref = "/"
     } = props;
 
     const [colorScheme, setColorScheme] = useState<ColorScheme>(() => getPreferredColorScheme());
@@ -40,7 +42,15 @@ export function AuthLayout(props: {
             <div className="kc-scene-glow kc-scene-glow-left pointer-events-none absolute -bottom-20 -left-16 z-0 h-56 w-56 rounded-full bg-[var(--kc-scene-glow-left)] blur-3xl sm:-bottom-28 sm:-left-24 sm:h-80 sm:w-80" />
             <div className="kc-scene-glow kc-scene-glow-right pointer-events-none absolute -right-10 -top-14 z-0 h-52 w-52 rounded-full bg-[var(--kc-scene-glow-right)] blur-3xl sm:-right-16 sm:-top-20 sm:h-72 sm:w-72" />
 
-            <div className="absolute left-4 right-4 top-3 z-20 sm:left-auto sm:right-6 sm:top-6">
+            <div className="absolute left-4 right-4 top-3 z-20 flex items-center justify-between gap-3 sm:left-6 sm:right-6 sm:top-6">
+                <a
+                    href={homeHref}
+                    className="kc-home-button inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] text-[var(--kc-field-muted)] shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl"
+                    aria-label="Back to home"
+                    title="Back to home"
+                >
+                    <BackArrowIcon className="h-4.5 w-4.5" />
+                </a>
                 <div className="kc-theme-toggle-shell flex items-center justify-center gap-1 rounded-full border border-[var(--kc-card-border)] bg-[var(--kc-card-bg)] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.08)] backdrop-blur-xl">
                     <ColorSchemeButton
                         label="Light"
@@ -101,6 +111,16 @@ export function AuthLayout(props: {
                 </div>
             </div>
         </div>
+    );
+}
+
+function BackArrowIcon(props: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={props.className} aria-hidden="true">
+            <path d="M14.5 5.5 8 12l6.5 6.5" />
+            <path d="M8.5 12h11" />
+            <path d="M5.25 12h.01" />
+        </svg>
     );
 }
 

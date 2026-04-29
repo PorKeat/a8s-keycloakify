@@ -7,6 +7,7 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { ActionArrowIcon, AuthLayout } from "../components/AuthLayout";
+import { getHomeHref } from "../components/FormPrimitives";
 import { getSortedSocialProviders, SocialProvidersSection } from "../components/SocialProviders";
 import UserProfileFormFieldsCompact from "../components/UserProfileFormFieldsCompact";
 
@@ -94,6 +95,7 @@ export default function Register(props: { kcContext: RegisterKcContext; i18n: I1
             contentClassName="md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
             rightColumnClassName="md:px-12 lg:px-14"
             formShellClassName="max-w-[41rem]"
+            homeHref={getHomeHref(kcContext)}
         >
             {message !== undefined && (
                 <div

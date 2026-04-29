@@ -75,7 +75,7 @@ docker restart keycloak
 After Keycloak restarts, go to:
 
 -   `Realm settings` -> `Themes`
--   Set `Login theme` to `keycloakify-starter`
+-   Set `Login theme` to `a8s`
 
 ## Recommended Persistent Docker Compose Setup
 

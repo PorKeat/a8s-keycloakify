@@ -560,12 +560,38 @@
         transform: translateY(-1px);
     }
 
+    .kc-home-button {
+        text-decoration: none;
+        transition:
+            color 180ms ease,
+            background-color 180ms ease,
+            border-color 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+    }
+
+    .kc-home-button svg {
+        transition: transform 180ms ease;
+    }
+
+    .kc-home-button:hover {
+        color: var(--kc-page-fg);
+        border-color: var(--kc-field-hover-border);
+        background: rgba(245, 96, 33, 0.08);
+        transform: translateY(-1px);
+    }
+
+    .kc-home-button:hover svg {
+        transform: translateX(-2px);
+    }
+
     .kc-check-input:focus-visible,
     .kc-primary-button:focus-visible,
     .kc-social-button:focus-visible,
     .kc-icon-button:focus-visible,
     .kc-link:focus-visible,
     .kc-link-accent:focus-visible,
+    .kc-home-button:focus-visible,
     .kc-control-button:focus-visible {
         outline: none;
         box-shadow: 0 0 0 4px var(--kc-ring);
@@ -624,6 +650,42 @@
 
     .kc-primary-button:hover .kc-primary-arrow {
         transform: translateX(4px);
+    }
+
+    .kc-secondary-button {
+        cursor: pointer;
+        border: 1px solid var(--kc-card-border);
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--kc-page-fg);
+        transition:
+            transform 180ms ease,
+            border-color 180ms ease,
+            background-color 180ms ease,
+            box-shadow 180ms ease;
+    }
+
+    .kc-secondary-button:hover {
+        transform: translateY(-1px);
+        border-color: var(--kc-field-hover-border);
+        background: rgba(245, 96, 33, 0.08);
+    }
+
+    .kc-secondary-button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px var(--kc-ring);
+    }
+
+    .kc-message-card {
+        border-radius: 1.2rem;
+        border: 1px solid var(--kc-card-border);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 1rem;
+    }
+
+    .kc-message-card-error {
+        border-color: var(--kc-danger-border);
+        background: var(--kc-danger-surface);
+        color: var(--kc-danger);
     }
 
     .kc-primary-button:disabled {

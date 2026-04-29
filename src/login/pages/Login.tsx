@@ -6,6 +6,7 @@ import { useScript } from "keycloakify/login/pages/Login.useScript";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { ActionArrowIcon, AuthLayout } from "../components/AuthLayout";
+import { EnvelopeIcon, EyeIcon, FieldGroup, getHomeHref, LockIcon } from "../components/FormPrimitives";
 import { getSortedSocialProviders, SocialProvidersSection } from "../components/SocialProviders";
 
 type LoginKcContext = Extract<KcContext, { pageId: "login.ftl" }>;
@@ -96,6 +97,7 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
             contentClassName="md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
             rightColumnClassName="md:min-h-[40rem] md:px-12 lg:px-14"
             formShellClassName="max-w-[41rem] md:min-h-[30rem]"
+            homeHref={getHomeHref(kcContext)}
         >
             {auth.showUsername && usernameHidden && auth.attemptedUsername && (
                 <div className="mb-6 rounded-[1rem] border border-[var(--kc-card-border)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-sm text-[var(--kc-page-fg)]">
@@ -288,58 +290,5 @@ export default function Login(props: { kcContext: LoginKcContext; i18n: I18n }) 
                 </div>
             )}
         </AuthLayout>
-    );
-}
-
-function FieldGroup(props: { label: string; htmlFor: string; errorHtml?: string; errorId?: string; children: React.ReactNode }) {
-    const { label, htmlFor, errorHtml, errorId, children } = props;
-
-    return (
-        <div className="space-y-2 sm:space-y-2.5">
-            <label htmlFor={htmlFor} className="kc-muted block text-[0.72rem] font-semibold uppercase tracking-[0.16em]">
-                {label}
-            </label>
-            {children}
-            {errorHtml !== undefined && errorHtml !== "" && (
-                <p
-                    id={errorId}
-                    className="kc-helper-error text-[0.82rem] leading-6"
-                    aria-live="polite"
-                    dangerouslySetInnerHTML={{
-                        __html: kcSanitize(errorHtml)
-                    }}
-                />
-            )}
-        </div>
-    );
-}
-
-function EnvelopeIcon(props: { className?: string }) {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={props.className} aria-hidden="true">
-            <rect x="3.75" y="5.75" width="16.5" height="12.5" rx="2.25" />
-            <path d="M5.5 8.25 12 13l6.5-4.75" />
-        </svg>
-    );
-}
-
-function LockIcon(props: { className?: string }) {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={props.className} aria-hidden="true">
-            <rect x="4.75" y="10.25" width="14.5" height="9" rx="2.25" />
-            <path d="M8 10.25V8a4 4 0 1 1 8 0v2.25" />
-        </svg>
-    );
-}
-
-function EyeIcon(props: { className?: string; crossed?: boolean }) {
-    const { className, crossed = false } = props;
-
-    return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
-            <path d="M2.75 12S6.5 6.75 12 6.75 21.25 12 21.25 12 17.5 17.25 12 17.25 2.75 12 2.75 12Z" />
-            <circle cx="12" cy="12" r="2.75" />
-            {crossed && <path d="M4 20 20 4" />}
-        </svg>
     );
 }

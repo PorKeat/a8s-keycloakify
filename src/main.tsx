@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import "./login/theme.css";
 import { KcPage } from "./kc.gen";
+import type { KcContext } from "./kc.gen";
 import faviconIcoUrl from "./login/assets/favicon.ico";
 
 // The following block can be uncommented to test a specific page with `yarn dev`
@@ -11,7 +12,7 @@ import { getKcContextMock } from "./login/KcPageStory";
 
 if (import.meta.env.DEV) {
     const requestedPage = new URL(window.location.href).searchParams.get("page");
-    const pageId = requestedPage === "register" ? "register.ftl" : "login.ftl";
+    const pageId = getPreviewPageId(requestedPage);
     const socialOverrides = {
         social: {
             displayInfo: true,
@@ -68,5 +69,34 @@ function setFavicon() {
 
     if (!link.parentNode) {
         document.head.appendChild(link);
+    }
+}
+
+function getPreviewPageId(requestedPage: string | null): KcContext["pageId"] {
+    switch (requestedPage) {
+        case "register":
+            return "register.ftl";
+        case "forgot-password":
+        case "reset-password":
+            return "login-reset-password.ftl";
+        case "update-password":
+            return "login-update-password.ftl";
+        case "verify-email":
+            return "login-verify-email.ftl";
+        case "info":
+            return "info.ftl";
+        case "error":
+            return "error.ftl";
+        case "terms":
+            return "terms.ftl";
+        case "update-profile":
+            return "login-update-profile.ftl";
+        case "idp-review-profile":
+            return "idp-review-user-profile.ftl";
+        case "update-email":
+            return "update-email.ftl";
+        case "login":
+        default:
+            return "login.ftl";
     }
 }
